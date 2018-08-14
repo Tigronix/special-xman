@@ -68,6 +68,7 @@ a {
 body {
   font-family: 'Foundry Sterling OT3 Demi';
   background: #212121;
+  overflow-x: hidden;
 }
 
 .flex {
@@ -352,6 +353,12 @@ a {
           transform: translateX(2px);
 }
 
+.scroll-section {
+  position: relative;
+  z-index: 1;
+  background: #212121;
+}
+
 .scroll-section__title {
   font-size: 196px;
   font-family: 'Foundry Sterling OT3';
@@ -381,6 +388,7 @@ a {
   left: 480px;
   top: 400px;
   min-height: 320px;
+  opacity: 0;
 }
 
 .scroll-section__wrap {
@@ -392,8 +400,12 @@ a {
   right: 0;
 }
 
+.scroll-section__fake-block {
+  background: #00bcd4;
+}
+
 .scroll-section__fake-item:last-child {
-  height: 1670px !important;
+  height: 1570px !important;
 }
 
 @media screen and (max-width: 1920px) and (min-width: 1441px) {

@@ -1,64 +1,79 @@
 (function(){
     const animationDuration = 'cubic-bezier(.43,0,.03,1)';
-    const tl = new TimelineMax();
+    const tlOnLoadScrollAnimation = new TimelineMax();
     const header = '.page-header';
     const menu = '.menu';
+    const controller = new ScrollMagic.Controller();
 
     const legacyOnLoadAnimation = function() {
-        tl
-        .fromTo('.logo', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
-        .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
-        .fromTo('.legacy__x', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.3')
-        .fromTo('.legacy__nav', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.3')
-        .staggerFromTo('.menu__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
-        .fromTo('.scroll-me', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.3')
+        tlOnLoadScrollAnimation
+        .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
+        .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
+        .fromTo('.legacy__x', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
+        .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
+        .staggerFromTo('.menu__link', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
+        .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
         ;
     };
 
     const legacyOnScrollAnimation = function() {
-        const windowWidth = $('window').width();
+        const legacyHeight = $('.legacy').innerHeight();
 
         $(window).on('scroll', function(){
             const windowOffsetTop = $(header).offset().top;
-            const tl = new TimelineMax();
+            const tlOnEnterScrollAnimation = new TimelineMax();
+            const tlOnLeaveScrollAnimation = new TimelineMax();
+
             const tweenIn = function(){
-                return tl.
-                to(menu, 1, {top:'53', zIndex: '10', position:'fixed', ease: animationDuration})
+                return tlOnEnterScrollAnimation
+                .to('.legacy__x', 2, {fill:'#212121', scale:'10', ease: animationDuration})
+                .to('.legacy', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
+                .to('.scroll-section__fake-block', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
+                .to('.legacy__h1', 2, {x:'-2000', ease: animationDuration}, '-=2')
+                .to(menu, 1, {top:'53', zIndex: '10', position:'fixed', ease: animationDuration}, '-=2')
+                .to('.logo', 1, {y:'-100', ease: animationDuration}, '-=2')
                 ;
             };
             const tweenOut = function(){
-                return tl
-                .fromTo(menu, 1, {top: '-20'}, {top:'0', zIndex: '', position:'relative', ease: animationDuration})
-                // .fromTo()
+                return tlOnLeaveScrollAnimation
+                .to('.legacy__x', 2, {fill:'#00bcd4', scale:'1', ease: animationDuration})
+                .to('.legacy', 2, {backgroundColor:'#ff5722', ease: animationDuration}, '-=2')
+                .to('.scroll-section__fake-block', 2, {backgroundColor:'#00bcd4', ease: animationDuration}, '-=2')
+                .to('.legacy__h1', 2, {x:'0', ease: animationDuration}, '-=2')
+                .fromTo(menu, 1, {top: '-20'}, {top:'0', zIndex: '', position:'relative', ease: animationDuration}, '-=2')
+                .to('.logo', 1, {y:'0', ease: animationDuration}, '-=2')
                 ;
             };
 
-
-            if(windowOffsetTop >= 65){
+            if(windowOffsetTop > 100){
                 $(menu).addClass('menu--fixed');
-                $(header).addClass('header--fixed');
                 tweenIn();
-            }else{
+            }else if(windowOffsetTop < 99){
                 $(menu).removeClass('menu--fixed');
-                $(header).removeClass('header--fixed');
                 tweenOut();
             }
+
         });
+
+        const fakeBlockOffset = $('#fakeBlock').offset().top;
+        const firstFakeItemHeight = $('.scroll-section__fake-item:first-child').offset().top;
+        const scrollToFirstTitleNumber = fakeBlockOffset + firstFakeItemHeight - 250;
+        console.log(scrollToFirstTitleNumber);
+
+        const scrollToFirstTitle = function(){
+            return new TimelineMax().to(window, 1.5, {scrollTo:scrollToFirstTitleNumber});
+        };
+        const scene = new ScrollMagic.Scene({
+        })
+        .setTween()
+        .on('enter', function(){
+            scrollToFirstTitle();
+        })
+        .addTo(controller);
+        scene.offset(120);
     };
 
-    const renderTemplate = function (index, titleHeight, contentHeight, parent, title, content) {
-    	title.style.height = titleHeight+'px';
-    	content.style.height = contentHeight+'px';
-
-        parent.setAttribute('data-number', index);
-
-    	let templateElement = parent.cloneNode(true);
-
-    	return templateElement;
-	}
-
     const mainScrollAnimation = function(){
-        let controller = new ScrollMagic.Controller();
         const fakeItems = document.querySelectorAll('.scroll-section__fake-item');
         const titles = document.querySelectorAll('.scroll-section__title');
         const contents = document.querySelectorAll('.scroll-section__content');
@@ -81,12 +96,12 @@
 
             const tweenIn = function(index){
                 return new TimelineMax()
-                .fromTo($('#'+title+index), 0.1, {left:0, x: 2000}, {x:'0', left:0, ease: animationDuration})
+                .fromTo($('#'+title+index), 0.1, {left:0, x: 1800}, {x:'0', left:0, ease: animationDuration})
                 .fromTo($('#'+content+index), 0.1, {opacity:0 }, {opacity: 1, ease: animationDuration}, '-=0.1')
                 ;
             };
             const tweenOut = function(index){
-                $('#'+title+index).css('left', '-2000px');
+                $('#'+title+index).css('left', '-1800px');
                 $('#'+content+index).css('opacity', '0', 'z-index', '');
             };
 
@@ -94,7 +109,6 @@
                 triggerElement: '#'+fakeItem+i,
                 duration: durationTime
             })
-            // .addIndicators()
             .setTween(tweenIn(i))
             .on('end', function(){
                 tweenOut(i);
