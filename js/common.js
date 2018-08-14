@@ -106,7 +106,7 @@
     window.onload = function(){
 
         // legacy animation
-        // legacyOnLoadAnimation();
+        legacyOnLoadAnimation();
         legacyOnScrollAnimation();
 
         mainScrollAnimation();
