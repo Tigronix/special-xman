@@ -4,8 +4,9 @@
     const header = '.page-header';
     const menu = '.menu';
     const controller = new ScrollMagic.Controller();
+    SX = {};
 
-    const legacyOnLoadAnimation = function() {
+    SX.legacyOnLoadAnimation = function() {
         tlOnLoadScrollAnimation
         .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
         .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
@@ -16,7 +17,7 @@
         ;
     };
 
-    const legacyOnScrollAnimation = function() {
+    SX.legacyOnScrollAnimation = function() {
         const legacyHeight = $('.legacy').innerHeight();
 
         $(window).on('scroll', function(){
@@ -41,6 +42,8 @@
                 .to('.scroll-section__fake-block', 2, {backgroundColor:'#00bcd4', ease: animationDuration}, '-=2')
                 .to('.legacy__h1', 2, {x:'0', ease: animationDuration}, '-=2')
                 .fromTo(menu, 1, {top: '-20'}, {top:'0', zIndex: '', position:'relative', ease: animationDuration}, '-=2')
+                .to('.menu__link', 0.1, {textShadow:'-1px 0 #00bcd4, 0 1px #00bcd4, 1px 0 #00bcd4, 0 -1px #00bcd4', ease: animationDuration}, '-=2')
+                .to('.logo', 2, {textShadow:'-1px 0 #ff5722, 0 1px #ff5722, 1px 0 #ff5722, 0 -1px #ff5722', ease: animationDuration}, '-=2')
                 .to('.logo', 1, {y:'0', ease: animationDuration}, '-=2')
                 ;
             };
@@ -54,14 +57,19 @@
             }
 
         });
+    };
 
+    SX.scrollToMainContent = function(){
         const fakeBlockOffset = $('#fakeBlock').offset().top;
         const firstFakeItemHeight = $('.scroll-section__fake-item:first-child').offset().top;
         const scrollToFirstTitleNumber = fakeBlockOffset + firstFakeItemHeight - 250;
-        console.log(scrollToFirstTitleNumber);
 
         const scrollToFirstTitle = function(){
-            return new TimelineMax().to(window, 1.5, {scrollTo:scrollToFirstTitleNumber});
+            return new TimelineMax()
+            .to(window, 1.5, {scrollTo:scrollToFirstTitleNumber})
+            .to('.menu__link', 0.1, {textShadow:''}, '-=1.5')
+            .to('.logo', 0.1, {textShadow:''}, '-=1.5')
+            ;
         };
         const scene = new ScrollMagic.Scene({
         })
@@ -70,10 +78,10 @@
             scrollToFirstTitle();
         })
         .addTo(controller);
-        scene.offset(120);
+        scene.offset(60);
     };
 
-    const mainScrollAnimation = function(){
+    SX.mainScrollAnimation = function(){
         const fakeItems = document.querySelectorAll('.scroll-section__fake-item');
         const titles = document.querySelectorAll('.scroll-section__title');
         const contents = document.querySelectorAll('.scroll-section__content');
@@ -97,7 +105,7 @@
             const tweenIn = function(index){
                 return new TimelineMax()
                 .fromTo($('#'+title+index), 0.1, {left:0, x: 1800}, {x:'0', left:0, ease: animationDuration})
-                .fromTo($('#'+content+index), 0.1, {opacity:0 }, {opacity: 1, ease: animationDuration}, '-=0.1')
+                .fromTo($('#'+content+index), 0.1, {opacity:0 }, {zIndex: '2500', opacity: '1', ease: animationDuration}, '-=0.1')
                 ;
             };
             const tweenOut = function(index){
@@ -109,6 +117,7 @@
                 triggerElement: '#'+fakeItem+i,
                 duration: durationTime
             })
+            .setClassToggle('.menu__link', 'menu__link--scrolled')
             .setTween(tweenIn(i))
             .on('end', function(){
                 tweenOut(i);
@@ -117,14 +126,12 @@
         });
     };
 
-    window.onload = function(){
+    $(function onPageReady(){
+        SX.legacyOnLoadAnimation();
+        SX.legacyOnScrollAnimation();
 
-        // legacy animation
-        legacyOnLoadAnimation();
-        legacyOnScrollAnimation();
+        SX.mainScrollAnimation();
+        SX.scrollToMainContent();
 
-        mainScrollAnimation();
-    };
-
-
+    })
 })();
