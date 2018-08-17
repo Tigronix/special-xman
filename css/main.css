@@ -459,24 +459,83 @@ a {
 }
 
 .scroll-section__parallax-item--1 {
-  width: 500px;
   right: 268px;
   top: 231px;
   font-size: 902px;
+  width: 500px;
 }
 
 .scroll-section__parallax-item--2 {
-  width: 507px;
   left: 84px;
   top: 1084px;
   font-size: 510px;
+  width: 507px;
 }
 
 .scroll-section__parallax-item--3 {
-  width: 960px;
   right: -20px;
   top: 1263px;
   font-size: 960px;
+  width: 960px;
+}
+
+.scroll-section__parallax-item--4 {
+  left: 162px;
+  top: 1904px;
+  font-size: 497px;
+  width: 495px;
+}
+
+.scroll-section__parallax-item--5 {
+  left: 694px;
+  top: 2969px;
+  font-size: 550px;
+  width: 385px;
+}
+
+.scroll-section__parallax-item--6 {
+  right: 339px;
+  top: 2971px;
+  font-size: 902px;
+  width: 497px;
+}
+
+@media screen and (max-width: 1920px) and (min-width: 1441px) {
+  .scroll-section__parallax-item--0 {
+    left: 0.3125vw;
+    font-size: 41.66666666666667vw;
+    width: 36.45833333333333vw;
+  }
+  .scroll-section__parallax-item--1 {
+    right: 13.95833333333333vw;
+    font-size: 46.97916666666667vw;
+    width: 26.04166666666667vw;
+  }
+  .scroll-section__parallax-item--2 {
+    left: 4.375vw;
+    font-size: 26.5625vw;
+    width: 26.40625vw;
+  }
+  .scroll-section__parallax-item--3 {
+    right: -1.041666666666667vw;
+    font-size: 50vw;
+    width: 50vw;
+  }
+  .scroll-section__parallax-item--4 {
+    left: 8.4375vw;
+    width: 25.78125vw;
+    font-size: 25.78125vw;
+  }
+  .scroll-section__parallax-item--5 {
+    left: 36.14583333333333vw;
+    font-size: 28.64583333333333vw;
+    width: 20.05208333333333vw;
+  }
+  .scroll-section__parallax-item--6 {
+    right: 17.65625vw;
+    font-size: 46.97916666666667vw;
+    width: 25.88541666666667vw;
+  }
 }
 
 .link-more {
@@ -539,22 +598,4 @@ a {
 
 .xray img {
   max-width: 484px;
-}
-
-.main-svg__item {
-  -webkit-transition: fill 2s cubic-bezier(0.43, 0, 0.03, 1);
-  -o-transition: fill 2s cubic-bezier(0.43, 0, 0.03, 1);
-  transition: fill 2s cubic-bezier(0.43, 0, 0.03, 1);
-}
-
-.main-svg__item--front.active {
-  fill: #00b2c9;
-}
-
-.main-svg__item--side.active {
-  fill: #006a78;
-}
-
-.main-svg__item--down.active {
-  fill: #00545e;
 }
