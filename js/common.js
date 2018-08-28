@@ -1,5 +1,8 @@
+
+
 const animationDuration = 'cubic-bezier(.43,0,.03,1)';
 const controller = new ScrollMagic.Controller();
+const fromDesktop = window.matchMedia( "(min-width: 1440px)" );
 const atHorizontalTablet = window.matchMedia( "(max-width: 1439px) and (min-width: 1024px)" );
 const atVerticalTablet = window.matchMedia( "(max-width: 1023px) and (min-width: 769px)" );
 const atMobile = window.matchMedia( "(max-width: 768px)" );
@@ -25,21 +28,29 @@ SX.legacyOnScrollAnimation = function() {
     const legacyHeight = $('.legacy').innerHeight();
     const menu = '.menu';
     const header = '.page-header';
-    let xColor = '#00bcd4';
-    let logoTextShadow = '-1px 0 #ff5722, 0 1px #ff5722, 1px 0 #ff5722, 0 -1px #ff5722';
-    let logoPosition = '-100';
-    let menuPosition = '53';
-    let xScale = '10';
-    let h1Position = '-2000';
+    var xColorIn = '#1c1b1b';
+    var xColorLeave = '#00bcd4';
+    var logoTextShadow = '-1px 0 #ff5722, 0 1px #ff5722, 1px 0 #ff5722, 0 -1px #ff5722';
+    var logoPosition = '-100';
+    var menuPosition = '53';
+    var xScale = '10';
+    var h1Position = '-2000';
 
     if(atMobile.matches){
         logoPosition = 0;
-        menuPosition = 50;
+        menuPosition = 30;
+        xScale = 1;
+    }
+
+    if($globalWrapper.hasClass(pageStatic)){
+        logoTextShadow = '';
     }
 
     if($globalWrapper.hasClass(pagePeople)){
-        xColor = '#ff5722';
-        logoTextShadow = '';
+        xColorLeave = '#ff5722';
+        if(atMobile.matches){
+            xColorIn = '#ff5722';
+        }
     }
 
     if($globalWrapper.hasClass(pageStatic)){
@@ -55,9 +66,9 @@ SX.legacyOnScrollAnimation = function() {
 
         const tweenIn = function(){
             return tlOnEnterScrollAnimation
-            .to('.legacy__x', 2, {fill:'#212121', scale: xScale, ease: animationDuration})
+            .to('.legacy__x', 2, {fill: xColorIn, scale: xScale, ease: animationDuration})
             .to('.legacy--main', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
-            .to('.scroll-section__fake-block', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
+            .to('.scroll-section__fake-block', 2, {backgroundColor:'#1c1b1b', ease: animationDuration}, '-=2')
             .to('.legacy__h1', 2, {x: h1Position, ease: animationDuration}, '-=2')
             .to(menu, 1, {top: menuPosition, zIndex: '10', position:'fixed', ease: animationDuration}, '-=2')
             .to('.logo', 1, {y:logoPosition, ease: animationDuration}, '-=2')
@@ -65,7 +76,7 @@ SX.legacyOnScrollAnimation = function() {
         };
         const tweenOut = function(){
             return tlOnLeaveScrollAnimation
-            .to('.legacy__x', 2, {fill: xColor, scale:'1', x:'-50%', ease: animationDuration})
+            .to('.legacy__x', 2, {fill: xColorLeave, scale:'1', x:'-50%', ease: animationDuration})
             .to('.legacy--main', 2, {backgroundColor:'#ff5722', ease: animationDuration}, '-=2')
             .to('.scroll-section__fake-block', 2, {backgroundColor:'#00bcd4', ease: animationDuration}, '-=2')
             .to('.legacy__h1', 2, {x:'0', ease: animationDuration}, '-=2')
@@ -89,7 +100,7 @@ SX.legacyOnScrollAnimation = function() {
 
 SX.scrollToMainContent = function(){
     const fakeBlock = document.querySelector('#fakeBlock');
-    let humanError = - 250;
+    var humanError = - 250;
 
     if(atHorizontalTablet.matches){
         humanError = - 0;
@@ -112,40 +123,42 @@ SX.scrollToMainContent = function(){
             .to('.logo', 0.1, {textShadow:''}, '-=1.5')
             ;
         };
-        const scene = new ScrollMagic.Scene({
-        })
-        .setTween()
-        .on('enter', function(){
-            scrollToFirstTitle();
-        })
-        .addTo(controller);
-        scene.offset(60);
+        if(fromDesktop.matches){
+            const scene = new ScrollMagic.Scene({
+            })
+            .setTween()
+            .on('enter', function(){
+                scrollToFirstTitle();
+            })
+            .addTo(controller);
+            scene.offset(60);
+        }
     }
 };
 
 SX.mainScrollAnimation = function(){
-    const fakeItems = document.querySelectorAll('.scroll-section__fake-item');
-    const titles = document.querySelectorAll('.scroll-section__title');
-    const contents = document.querySelectorAll('.scroll-section__content');
+    const fakeItems = $('.scroll-section__fake-item');
+    const titles = $('.scroll-section__title');
+    const contents = $('.scroll-section__content');
     const title = 'title';
     const fakeItem = 'fakeItem';
     const content = 'content';
-    let durationTime = 1200;
-    let titleAway = 1800;
+    var durationTime = 1200;
+    var titleAway = 1800;
 
     if(atMobile.matches){
         titleAway = 767;
     }
 
-    titles.forEach(function(it, i, array){
+    titles.each(function(i, it, array){
         it.id = title+i;
     });
 
-    contents.forEach(function(it, i, array){
+    contents.each(function(i, it, array){
         it.id = content+i;
     });
 
-    fakeItems.forEach(function(it, i, array){
+    fakeItems.each(function(i, it, array){
         it.id = fakeItem+i;
         it.style.height = durationTime+'px';
 
@@ -160,28 +173,40 @@ SX.mainScrollAnimation = function(){
             $('#'+content+index).css({'opacity': '0', 'z-index': ''});
         };
 
-        new ScrollMagic.Scene({
-            triggerElement: '#'+fakeItem+i,
-            duration: durationTime
-        })
-        .setClassToggle('.menu__link', 'menu__link--scrolled')
-        .setTween(tweenIn(i))
-        .on('end', function(){
-            tweenOut(i);
-        })
-        .addTo(controller);
+        if(fromDesktop.matches) {
+            new ScrollMagic.Scene({
+                triggerElement: '#'+fakeItem+i,
+                duration: durationTime
+            })
+            .setClassToggle('.menu__link', 'menu__link--scrolled')
+            .setTween(tweenIn(i))
+            .on('end', function(){
+                tweenOut(i);
+            })
+            .addTo(controller);
+        }
     });
 };
 
 SX.cursorAddClassToActiveElems = function(){
     const allLinks = $('a');
     const allBtns = $('button');
+    const allInputs = $('input');
+    const allTextareas = $('textarea');
 
     allLinks.each(function(){
         $(this).addClass('hover mouseDown')
     });
 
     allBtns.each(function(){
+        $(this).addClass('hover mouseDown')
+    });
+
+    allInputs.each(function(){
+        $(this).addClass('hover mouseDown')
+    });
+
+    allTextareas.each(function(){
         $(this).addClass('hover mouseDown')
     });
 };
@@ -244,34 +269,34 @@ SX.parallaxHover = function(){
 
     const parallaxFrontTweenIn = function(){
         return new TimelineMax()
-        .to(svgFront, animationTime, {fill: frontHover, animationDuration})
+        .to(svgFront, animationTime, {fill: frontHover, ease: animationDuration})
         ;
     };
     const parallaxFrontTweenOut = function(){
         return new TimelineMax()
-        .to(svgFront, animationTime, {fill: front, animationDuration})
+        .to(svgFront, animationTime, {fill: front, ease: animationDuration})
         ;
     };
 
     const parallaxSideTweenIn = function(){
         return new TimelineMax()
-        .to(svgSide, animationTime, {fill: sideHover, animationDuration})
+        .to(svgSide, animationTime, {fill: sideHover, ease: animationDuration})
         ;
     };
     const parallaxSideTweenOut = function(){
         return new TimelineMax()
-        .to(svgSide, animationTime, {fill: side, animationDuration})
+        .to(svgSide, animationTime, {fill: side, ease: animationDuration})
         ;
     };
 
     const parallaxDownTweenIn = function(){
         return new TimelineMax()
-        .to(svgDown, animationTime, {fill: downHover, animationDuration})
+        .to(svgDown, animationTime, {fill: downHover, ease: animationDuration})
         ;
     };
     const parallaxDownTweenOut = function(){
         return new TimelineMax()
-        .to(svgDown, animationTime, {fill: down, animationDuration})
+        .to(svgDown, animationTime, {fill: down, ease: animationDuration})
         ;
     };
 
@@ -298,14 +323,14 @@ SX.parallaxHover = function(){
     });
 };
 
-SX.legacyPeopleHover = function(){
+SX.legacyStaticHover = function(){
     const $globalWrapper = $('.global-wrapper');
     const $legacyContent = $('.legacy__content');
     const $legacyX = $('.legacy__x');
     const $legacyTitle = $('.legacy__h1');
     const $legacyDesc = $('.legacy__desc');
 
-    if($globalWrapper.hasClass('global-wrapper--people')){
+    if($globalWrapper.hasClass('global-wrapper--static')){
         $legacyTitle.on('mouseenter', function(){
             $legacyX.addClass('legacy__x--hover');
         });
@@ -328,7 +353,7 @@ SX.legacyPeopleHover = function(){
 };
 
  SX.peopleSlider = function() {
-	let elem = '.people-slider__slider';
+	var elem = '.people-slider__slider';
 	if(elem){
 		$(elem).owlCarousel({
             nav: true,
@@ -366,15 +391,127 @@ SX.legacyPeopleHover = function(){
     owlDotsNumbers();
 }
 
+ SX.historySlider = function() {
+	const historySlider = function(){
+        var historySlider = '.history__slider';
+    	if(historySlider){
+    		$(historySlider).owlCarousel({
+                nav: false,
+                dots: true,
+                dotsEach: true,
+                dotsData: true,
+                dotsContainer: '.history__nav-content',
+                items: 1,
+                loop: false,
+                mouseDrag: false
+    		});
+    	}
+    };
+
+    const owlDotsNumbers = function(){
+        const dots = $('.history__nav .owl-dot');
+        const historySlider = $('.history__slider');
+        const historyYear = historySlider.find('.history__year');
+
+        dots.each(function(index, item){
+            if(index <= 2008){
+                index = 2008 + index;
+            }
+
+            $(this).html(index).addClass('hover mouseDown');
+        });
+
+        historyYear.each(function(index, item){
+            if(index <= 2008){
+                index = 2008 + index;
+            }
+
+            $(this).html(index);
+        });
+    };
+
+    const historyTypeSlider = function(){
+    	if(historyTypeSlider){
+
+    	}
+    };
+
+    const historyTabs = function(){
+        const $btn = $('.history__btn');
+        var historyTypeSlider = '.history__type-slider';
+
+        $btn.each(function(){
+            $(this).on('click', function(){
+                const dataParent = $(this).data('tabparent');
+                const dataType = $(this).data('tabitem');
+                const $parent = $('.'+ dataParent +'')
+
+                const $target = $parent.find('[data-tabitem="'+ dataType +'"]');
+
+                $(this).toggleClass('active');
+
+                if($(this).hasClass('active')){
+                    // $target.closest('.owl-item').show();
+
+                }else {
+                    // $target.closest('.owl-item').hide();
+                }
+            });
+        });
+
+        var callback = function(e){
+            var $items = $('.history__type-slider-item').closest('div');
+            // console.log($items);
+            $btn.each(function(){
+                if($(this).hasClass('active')){
+
+                }else {
+                    const btnData = $(this).data('tabitem');
+
+                    if(btnData === 'event'){
+                        $items.each(function(i, it){
+                            var itemType = $(this).data('tabitem');
+                            if(itemType === 'event'){
+                                // console.log(i, $(this));
+                                // $(historyTypeSlider).owlCarousel('remove', i);
+                                // $(historyTypeSlider).owlCarousel('remove.owl.carousel', ['0']);
+                            }
+                        });
+                    }
+                }
+            });
+            // $items = $('.history__type-slider-item').closest('div');
+            // console.log($items);
+        }
+
+        $(historyTypeSlider).owlCarousel({
+            nav: false,
+            dots: false,
+            items: 1,
+            loop: false,
+            onChanged: callback
+        });
+
+    };
+
+    historySlider();
+    owlDotsNumbers();
+    // historyTypeSlider();
+    historyTabs();
+}
+
+
+
 $(function onPageReady(){
     SX.legacyOnLoadAnimation();
-    SX.legacyPeopleHover();
+    SX.legacyStaticHover();
     SX.legacyOnScrollAnimation();
     SX.mainScrollAnimation();
     SX.scrollToMainContent();
     SX.parallaxInit();
     SX.parallaxHover();
     SX.peopleSlider();
+    SX.historySlider();
     SX.cursorAddClassToActiveElems();
 
     // custom cursor необходимо запускать последним
