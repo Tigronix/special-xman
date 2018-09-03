@@ -100,7 +100,7 @@ SX.legacyOnScrollAnimation = function() {
 
 SX.scrollToMainContent = function(){
     const fakeBlock = document.querySelector('#fakeBlock');
-    let humanError = - 250;
+    let humanError = - 350;
 
     if(atHorizontalTablet.matches){
         humanError = - 0;
@@ -589,7 +589,7 @@ SX.filterMenu = function(){
                 ;
             }
         });
-    }    
+    }
 };
 
 $(function onPageReady(){
