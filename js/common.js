@@ -144,7 +144,7 @@ SX.mainScrollAnimation = function(){
     const fakeItem = 'fakeItem';
     const content = 'content';
     let durationTime = 1200;
-    let titleAway = 1800;
+    let titleAway = 1900;
 
     if(atMobile.matches){
         titleAway = 767;
@@ -572,23 +572,31 @@ SX.filterMenu = function(){
     if(historyElem){
         const historyOffsetTop = $(history).offset().top;
 
-        $(window).on('scroll', function(e){
-            const headerOffsetTop = $(header).offset().top;
-            console.log(123);
+        const tweenIn = function(){
+            new TimelineMax()
+            .staggerFromTo(menuLinks, 0.5, {y:'0', opacity:'1'}, {y:'-30', opacity:'0', ease: animationDuration}, 0.1)
+            .staggerFromTo(filterMenuLinks, 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
+            ;
+        };
 
-            const tweenIn = function(){
-                new TimelineMax()
-                .staggerFromTo(menuLinks, 0.5, {y:'0', opacity:'1'}, {y:'-30', opacity:'0', ease: animationDuration})
-                .staggerFromTo(filterMenuLinks, 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
-                ;
-            };
-            if(headerOffsetTop > historyOffsetTop){
-                tweenIn();
-                $(window).unbind('scroll');
-            }else{
-                ;
-            }
-        });
+        const tweenOut = function(){
+            new TimelineMax()
+            .staggerFromTo(filterMenuLinks, 0.5, {y:'0', opacity:'1'}, {y:'-30', opacity:'0', ease: animationDuration}, 0.1)
+            .staggerFromTo(menuLinks, 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
+            ;
+        };
+
+        const scene = new ScrollMagic.Scene({
+            triggerElement: '#history',
+        })
+        .on('enter', function(){
+            tweenIn();
+        })
+        .on('leave', function(){
+            tweenOut();
+        })
+        .addIndicators()
+        .addTo(controller);
     }
 };
 
