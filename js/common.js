@@ -68,7 +68,7 @@ SX.legacyOnScrollAnimation = function() {
             return tlOnEnterScrollAnimation
             .to('.legacy__x', 2, {fill: xColorIn, scale: xScale, ease: animationDuration})
             .to('.legacy--main', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
-            .to('.scroll-section__fake-block', 2, {backgroundColor:'#1c1b1b', ease: animationDuration}, '-=2')
+            .to('.scroll-section__fake-block', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
             .to('.legacy__h1', 2, {x: h1Position, ease: animationDuration}, '-=2')
             .to(menu, 1, {top: menuPosition, zIndex: '10', position:'fixed', ease: animationDuration}, '-=2')
             .to('.logo', 1, {y:logoPosition, ease: animationDuration}, '-=2')
