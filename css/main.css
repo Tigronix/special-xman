@@ -73,6 +73,9 @@ a, button, svg, .owl-prev, .owl-next, .slick-arrow {
       -ms-user-select: none;
           user-select: none; }
 
+a {
+  color: currentColor; }
+
 body {
   font-family: 'Foundry Sterling OT3 Demi';
   background: #212121;
@@ -80,7 +83,6 @@ body {
 
 .hover {
   position: relative;
-  z-index: 1500;
   position: relative;
   outline: 10px solid transparent; }
   .hover:after {
@@ -489,7 +491,8 @@ a {
 .scroll-section {
   position: relative;
   z-index: 1;
-  background: #212121; }
+  background: #212121;
+  overflow: hidden; }
   .scroll-section__title {
     position: absolute;
     left: 0;
@@ -529,8 +532,6 @@ a {
     z-index: 5; }
   .scroll-section__fake-block {
     background: #00bcd4; }
-  .scroll-section__fake-item:last-child {
-    height: 1470px !important; }
   .scroll-section__desc {
     margin-bottom: 104px; }
     .scroll-section__desc:last-child {
@@ -640,12 +641,6 @@ a {
       font-size: 14px;
       margin-bottom: 33px;
       width: 280px; } }
-  @media screen and (min-height: 1023px) {
-    .scroll-section__fake-item:last-child {
-      height: 1700px !important; } }
-  @media screen and (max-height: 550px) {
-    .scroll-section__fake-item:last-child {
-      height: 1300px !important; } }
 
 .link-more {
   font-size: 48px;
@@ -694,7 +689,7 @@ a {
           border-radius: 50%;
   background: #fff;
   position: fixed;
-  z-index: 1;
+  z-index: 11;
   -webkit-box-shadow: inset 0 0 0 0px #fff;
           box-shadow: inset 0 0 0 0px #fff;
   -webkit-transition: -webkit-box-shadow 0.5s cubic-bezier(0.43, 0, 0.03, 1);
@@ -1903,3 +1898,61 @@ a {
       .gallery__nav {
         font-size: 14px;
         padding-right: 20px; } }
+
+.join {
+  height: 300px;
+  background: #00bcd4;
+  color: #fff;
+  position: relative;
+  z-index: 10;
+  -webkit-perspective: 10000px;
+          perspective: 10000px;
+  -webkit-perspective-origin: 50% 50%;
+          perspective-origin: 50% 50%;
+  -webkit-transition: 1s cubic-bezier(0.43, 0, 0.03, 1);
+  -o-transition: 1s cubic-bezier(0.43, 0, 0.03, 1);
+  transition: 1s cubic-bezier(0.43, 0, 0.03, 1); }
+  .join:hover .join__desc {
+    -webkit-transform: rotateX(-90deg) translateY(50%) translateZ(0);
+            transform: rotateX(-90deg) translateY(50%) translateZ(0); }
+  .join:hover .join__text--rotated {
+    background: #ff5722; }
+  .join__desc {
+    height: 100%;
+    font-size: 52px;
+    font-weight: bold;
+    display: block;
+    -webkit-transition: -webkit-transform 1s cubic-bezier(0.43, 0, 0.03, 1);
+    transition: -webkit-transform 1s cubic-bezier(0.43, 0, 0.03, 1);
+    -o-transition: transform 1s cubic-bezier(0.43, 0, 0.03, 1);
+    transition: transform 1s cubic-bezier(0.43, 0, 0.03, 1);
+    transition: transform 1s cubic-bezier(0.43, 0, 0.03, 1), -webkit-transform 1s cubic-bezier(0.43, 0, 0.03, 1);
+    -webkit-transform-origin: 50% 100%;
+        -ms-transform-origin: 50% 100%;
+            transform-origin: 50% 100%;
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d; }
+  .join__text {
+    width: 100%;
+    height: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-left: 25vw; }
+    .join__text--rotated {
+      position: absolute;
+      left: 0;
+      bottom: 100%;
+      -webkit-transform: rotateX(90deg);
+              transform: rotateX(90deg);
+      -webkit-transform-origin: 50% 100%;
+          -ms-transform-origin: 50% 100%;
+              transform-origin: 50% 100%; }
