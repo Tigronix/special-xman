@@ -1388,15 +1388,15 @@ a {
     width: 100%;
     padding: 30px 12.86458333333333vw 300px 11.92708333333333vw; }
     .history__type-slider-slide-wrapper[data-tabitem="event"] .history__type-slider-item:before {
-      background: #00bcd4; }
+      background-image: url(../img/event.svg); }
     .history__type-slider-slide-wrapper[data-tabitem="event"] .history__type-slider-item:after {
       background: #00bcd4; }
     .history__type-slider-slide-wrapper[data-tabitem="award"] .history__type-slider-item:before {
-      background: #ff5722; }
+      background-image: url(../img/award.svg); }
     .history__type-slider-slide-wrapper[data-tabitem="award"] .history__type-slider-item:after {
       background: #ff5722; }
     .history__type-slider-slide-wrapper[data-tabitem="people"] .history__type-slider-item:before {
-      background: #4d75a3; }
+      background-image: url(../img/people.svg); }
     .history__type-slider-slide-wrapper[data-tabitem="people"] .history__type-slider-item:after {
       background: #4d75a3; }
   .history__type-slider-item-wrap {
@@ -1417,7 +1417,9 @@ a {
       content: '';
       width: 75px;
       height: 75px;
-      background: #00bcd4;
+      background: url(../img/event.svg) no-repeat center;
+      -webkit-background-size: 100% auto;
+              background-size: 100% auto;
       position: absolute;
       left: 0;
       top: 0; }
