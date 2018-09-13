@@ -12,16 +12,22 @@ const pagePeople = 'global-wrapper--people';
 const SX = {};
 
 SX.legacyOnLoadAnimation = function() {
+    const pageStatic = document.querySelector('.global-wrapper--static');
     const tlOnLoadScrollAnimation = new TimelineMax();
 
-    tlOnLoadScrollAnimation
-    .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
-    .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
-    .fromTo('.legacy__x', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-    .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-    .staggerFromTo('.menu__link', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
-    .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-    ;
+    if(pageStatic){
+
+    }else{
+        tlOnLoadScrollAnimation
+        .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
+        .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
+        .fromTo('.legacy__x', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
+        .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
+        .staggerFromTo('.menu__link', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
+        .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
+        ;
+    }
+
 };
 
 SX.legacyOnScrollAnimation = function() {
@@ -193,6 +199,7 @@ SX.cursorAddClassToActiveElems = function(){
     const allBtns = $('button');
     const allInputs = $('input');
     const allTextareas = $('textarea');
+    const otherElems = $('.js-cursor-hover');
 
     allLinks.each(function(){
         $(this).addClass('hover mouseDown')
@@ -209,21 +216,30 @@ SX.cursorAddClassToActiveElems = function(){
     allTextareas.each(function(){
         $(this).addClass('hover mouseDown')
     });
+
+    allTextareas.each(function(){
+        $(this).addClass('hover mouseDown')
+    });
+
+    otherElems.each(function(){
+        $(this).addClass('hover mouseDown')
+    });
 };
 
 SX.customCursor = function(){
     const $cursor = $('.cursor');
     const $xray = $('.xray');
+    const mouseDown = document.querySelector('body');
 
     $(window).on('mousemove', function(event){
-        const cursorHalfWidth = 0;
+        const cursorHalfWidth = 24;
         const cursorPosLeft = event.clientX;
         const cursorPosTop = event.clientY;
         const target = event.target;
 
-        $cursor.css({'left': cursorPosLeft, 'top': cursorPosTop,
-        'transform': 'translate('+ '-' + cursorHalfWidth + 'px, ' + '-' + cursorHalfWidth + 'px)' });
-        $xray.css({'left': cursorPosLeft, 'top': cursorPosTop});
+        // $cursor.css({'left': cursorPosLeft, 'top': cursorPosTop,
+        // 'transform': 'translate('+ '-' + cursorHalfWidth + 'px, ' + '-' + cursorHalfWidth + 'px)' });
+        // $xray.css({'left': cursorPosLeft - 24, 'top': cursorPosTop - 24});
     });
 
     $('.hover').on('mouseenter', function(){
@@ -235,11 +251,15 @@ SX.customCursor = function(){
     });
 
     $('.mouseDown').mousedown(function(){
-        $cursor.addClass('cursor--mouseDown');
+        $(this).addClass('active');
     });
 
     $('.mouseDown').mouseup(function(){
-        $cursor.removeClass('cursor--mouseDown');
+        $(this).removeClass('active');
+    });
+
+    $('.mouseDown').mouseleave(function(){
+        $(this).removeClass('active');
     });
 };
 
@@ -365,6 +385,7 @@ SX.legacyStaticHover = function(){
             navText: ['<svg class="hover mouseDown icon icon-arrow"><use xlink:href="#icon-arrow"></use></svg>', '<svg class="hover mouseDown icon icon-arrow"><use xlink:href="#icon-arrow"></use></svg>'],
             items: 1,
             loop: true,
+            navElement: 'button',
             responsive: {
                 0: {
                     dots: false,
