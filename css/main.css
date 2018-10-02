@@ -553,7 +553,7 @@ a {
 
 .scroll-section {
   position: relative;
-  z-index: 1;
+  z-index: 200;
   background: #212121;
   overflow: hidden;
   padding-bottom: 70px;
