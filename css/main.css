@@ -187,7 +187,7 @@ a {
   left: 0;
   top: 53px;
   right: 0;
-  z-index: 5;
+  z-index: 150;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -238,7 +238,9 @@ a {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  text-shadow: -1px 0 #ff5722, 0 1px #ff5722, 1px 0 #ff5722, 0 -1px #ff5722; }
+  text-shadow: -1px 0 #ff5722, 0 1px #ff5722, 1px 0 #ff5722, 0 -1px #ff5722;
+  position: relative;
+  z-index: 150; }
   .logo .icon {
     font-size: 92px;
     height: 31px;
@@ -266,7 +268,7 @@ a {
     margin-left: 49.94791666666667vw; }
   .legacy__content {
     position: relative;
-    z-index: 5;
+    z-index: 160;
     margin-top: -55px; }
   .legacy__x {
     font-size: 700px;
@@ -279,7 +281,8 @@ a {
             transform: translate(-50%, 0);
     -webkit-transition: color 1s cubic-bezier(0.43, 0, 0.03, 1), fill 1s cubic-bezier(0.43, 0, 0.03, 1);
     -o-transition: color 1s cubic-bezier(0.43, 0, 0.03, 1), fill 1s cubic-bezier(0.43, 0, 0.03, 1);
-    transition: color 1s cubic-bezier(0.43, 0, 0.03, 1), fill 1s cubic-bezier(0.43, 0, 0.03, 1); }
+    transition: color 1s cubic-bezier(0.43, 0, 0.03, 1), fill 1s cubic-bezier(0.43, 0, 0.03, 1);
+    z-index: 150; }
   .legacy__h1 {
     font-family: 'Foundry Sterling OT3';
     color: #ffffff;
@@ -522,7 +525,7 @@ a {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  z-index: 10; }
+  z-index: 150; }
   .scroll-me__text {
     font-size: 18px;
     letter-spacing: 1px;
@@ -831,18 +834,21 @@ a {
       display: none; }
 
 .xray {
-  display: none;
+  width: 100%;
+  margin: 0;
+  -webkit-mask-image: url(../img/test.png);
+          mask-image: url(../img/test.png);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 400px;
+          mask-size: 400px;
   position: absolute;
   left: 0;
   top: 0;
-  -webkit-transform: translate(-49%, -49%);
-      -ms-transform: translate(-49%, -49%);
-          transform: translate(-49%, -49%);
-  width: 484px;
-  height: 484px;
-  background: url(../img/xray.png) no-repeat;
-  -webkit-background-size: 100% auto;
-          background-size: 100% auto; }
+  height: 100vh;
+  min-height: 800px;
+  background: url(../img/repeat.png) repeat;
+  z-index: 100; }
 
 .ie11 .global-wrapper {
   overflow: hidden; }
@@ -882,7 +888,7 @@ a {
     color: #ff5722; }
 
 .global-wrapper--static .xray {
-  background-image: url(../img/xray--orange.png); }
+  background-image: url(../img/repeat-orange.png); }
 
 .global-wrapper--history .legacy, .global-wrapper--gallery .legacy {
   margin-bottom: 0;
@@ -898,7 +904,7 @@ a {
     fill: #00bcd4 !important; }
 
 .global-wrapper--history .xray, .global-wrapper--gallery .xray {
-  background-image: url(../img/xray.png); }
+  background-image: url(../img/repeat.png); }
 
 @media screen and (max-width: 1440px) {
   .global-wrapper--static .legacy {

@@ -71,7 +71,8 @@ SX.legacyOnScrollAnimation = function() {
 
         const tweenIn = function(){
             return tlOnEnterScrollAnimation
-            .to('.legacy__x', 2, {fill: xColorIn, scale: xScale, ease: animationDuration})
+            .to('.legacy__x', 2, {scale: xScale, ease: animationDuration})
+            .to('.legacy__x', 2, {fill: xColorIn, ease: animationDuration}, '-=3')
             .to('.legacy--main', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
             .to('.scroll-section__fake-block', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
             .to('.legacy__h1', 2, {x: h1Position, ease: animationDuration}, '-=2')
@@ -81,7 +82,8 @@ SX.legacyOnScrollAnimation = function() {
         };
         const tweenOut = function(){
             return tlOnLeaveScrollAnimation
-            .to('.legacy__x', 2, {fill: xColorLeave, scale:'1', x:'-50%', ease: animationDuration})
+            .to('.legacy__x', 2, {scale:'1', x:'-50%', ease: animationDuration})
+            .to('.legacy__x', 2, {fill: xColorLeave, ease: animationDuration}, '-=2.5')
             .to('.legacy--main', 2, {backgroundColor:'#ff5722', ease: animationDuration}, '-=2')
             .to('.scroll-section__fake-block', 2, {backgroundColor:'#00bcd4', ease: animationDuration}, '-=2')
             .to('.legacy__h1', 2, {x:'0', ease: animationDuration}, '-=2')
@@ -783,6 +785,24 @@ SX.browserDetect = function() {
     }
 }
 
+SX.projector = function(){
+    const $mask = $('.xray');
+    var currentMousePos = { x: -1, y: -1 };
+
+    $('.legacy').on('mousemove', function(e){
+        currentMousePos.x = e.pageX;
+        currentMousePos.y = e.pageY;
+
+        $mask.css({'mask-position-x': currentMousePos.x - 200, 'mask-position-y': currentMousePos.y - 200,});
+    });
+    $('.page-header').on('mousemove', function(e){
+        currentMousePos.x = e.pageX;
+        currentMousePos.y = e.pageY;
+
+        $mask.css({'mask-position-x': currentMousePos.x - 200, 'mask-position-y': currentMousePos.y - 200,});
+    });
+}
+
 $(function onPageReady(){
     SX.legacyOnLoadAnimation();
     SX.legacyStaticHover();
@@ -804,6 +824,7 @@ $(function onPageReady(){
     // custom cursor необходимо запускать последним
     SX.cursorAddClassToActiveElems();
     SX.customCursor();
+    SX.projector();
 })
 
 new Vue({
