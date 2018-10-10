@@ -373,7 +373,7 @@ SX.legacyStaticHover = function(){
     }
 };
 
- SX.peopleSlider = function() {
+SX.peopleSlider = function() {
 	let elem = '.people-slider__slider';
 	if(elem){
 		$(elem).owlCarousel({
@@ -413,7 +413,7 @@ SX.legacyStaticHover = function(){
     owlDotsNumbers();
 }
 
- SX.historySlider = function() {
+SX.historySlider = function() {
      const historyTypeSlider = '.history__type-slider';
      const historySlider = '.history__slider';
 
@@ -457,6 +457,7 @@ SX.legacyStaticHover = function(){
           arrows: false,
           infinite: false,
           slidesToShow: 1,
+          draggable: false
         }
     };
 
@@ -484,7 +485,6 @@ SX.legacyStaticHover = function(){
             $(this).on('click', function(){
                 $(this).toggleClass('activeHistory');
                 $('.activeHistory').each(function(i, it){
-                    console.log(i);
                     if(i === 0){
                         $(it).addClass('activeHistory');
                     }
@@ -509,11 +509,57 @@ SX.legacyStaticHover = function(){
         };
     };
 
+    const nav = function(){
+        const slick = $(historyTypeSlider).slick('getSlick');
+        const $btns = $('.history__circle-line');
+        const $btnPrev = $('.history__circle-line--prev');
+        const $btnNext = $('.history__circle-line--next');
+
+        $btnPrev.on('click', function(){
+            const currentColor = $(this).closest('.history').find('.slick-current .slick-current').prev().data('tabitem');
+            if(currentColor === undefined){
+                currentColor = $(this).closest('.history').find('.slick-current .slick-current').data('tabitem');
+            }
+
+            $(historyTypeSlider).slick('slickPrev');
+            $btns.removeClass('event award people');
+            $btns.addClass(currentColor);
+        });
+
+        $btnNext.on('click', function(){
+            const currentColor = $(this).closest('.history').find('.slick-current .slick-current').next().data('tabitem');
+            if(currentColor === undefined){
+                currentColor = $(this).closest('.history').find('.slick-current .slick-current').data('tabitem');
+            }
+
+            $(historyTypeSlider).slick('slickNext');
+            $btns.removeClass('event award people');
+            $btns.addClass(currentColor);
+        });
+
+        if(fromDesktop.matches){
+            $('.history').on('mousewheel DOMMouseScroll', function(e){
+              if(typeof e.originalEvent.detail == 'number' && e.originalEvent.detail !== 0) {
+                if(e.originalEvent.detail > 0) {
+                  $(historyTypeSlider).slick('slickNext');
+                }
+              }
+            });
+
+            $(historyTypeSlider).on('afterChange', function(event, slick, currentSlide, nextSlide){
+              const currentColor = $(this).find('.slick-active').data('tabitem');
+
+              $btns.addClass(currentColor);
+            });
+        }
+    };
+
     historySliderInit();
     slickDotsNumbers();
     historyTypeSliderInit();
     // syncSliders();
     historyTabs();
+    nav();
 }
 
 SX.imgGallery = function(){
@@ -745,7 +791,6 @@ SX.socialMenu = function(){
 SX.adaptiveBg = function(){
     const $elem = $('.js-adaptive-bg');
     const $popupContainer = $('.lb-container');
-    console.log($popupContainer);
 
     $elem.on('click', function(){
         const bgDesktop = $(this).data('bg-desktop');
@@ -803,6 +848,42 @@ SX.projector = function(){
     });
 }
 
+SX.scrollToMainStatic = function(){
+    const controllerStatic = new ScrollMagic.Controller();
+
+    const scrollToHistory = function(){
+        return new TimelineMax()
+            .to(window, 1.5, {scrollTo: '.history', ease: animationDuration})
+            ;
+    };
+
+    const scrollToLegacy = function(){
+        return new TimelineMax()
+            .to(window, 1.5, {scrollTo: '.legacy', ease: animationDuration})
+            ;
+    };
+
+    if(fromDesktop.matches){
+        const sceneIn = new ScrollMagic.Scene({
+            offset: 50
+        })
+        .on('enter', function(){
+            scrollToHistory();
+        })
+        .addIndicators()
+        .addTo(controllerStatic);
+
+        const sceneOut = new ScrollMagic.Scene({
+            triggerElement: '.history',
+            offset: 10,
+        })
+        .on('leave', function(){
+            scrollToLegacy();
+        })
+        .addIndicators()
+        .addTo(controllerStatic);
+    }
+};
 $(function onPageReady(){
     SX.legacyOnLoadAnimation();
     SX.legacyStaticHover();
@@ -820,6 +901,7 @@ $(function onPageReady(){
     SX.socialMenu();
     SX.adaptiveBg();
     SX.browserDetect();
+    SX.scrollToMainStatic();
 
     // custom cursor необходимо запускать последним
     SX.cursorAddClassToActiveElems();
