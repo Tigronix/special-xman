@@ -71,6 +71,7 @@ SX.legacyOnScrollAnimation = function() {
 
         const tweenIn = function(){
             return tlOnEnterScrollAnimation
+            .to('.scroll-section', 0.1, {zIndex:'200'})
             .to('.legacy__x', 2, {scale: xScale, ease: animationDuration})
             .to('.legacy__x', 2, {fill: xColorIn, ease: animationDuration}, '-=3')
             .to('.legacy--main', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
@@ -82,6 +83,7 @@ SX.legacyOnScrollAnimation = function() {
         };
         const tweenOut = function(){
             return tlOnLeaveScrollAnimation
+            .to('.scroll-section', 0.1, {zIndex:'0'})
             .to('.legacy__x', 2, {scale:'1', x:'-50%', ease: animationDuration})
             .to('.legacy__x', 2, {fill: xColorLeave, ease: animationDuration}, '-=2.5')
             .to('.legacy--main', 2, {backgroundColor:'#ff5722', ease: animationDuration}, '-=2')
@@ -834,7 +836,7 @@ SX.projector = function(){
     const $mask = $('.xray');
     var currentMousePos = { x: -1, y: -1 };
 
-    $('.legacy').on('mousemove', function(e){
+    $('.legacy, .gallery').on('mousemove', function(e){
         currentMousePos.x = e.pageX;
         currentMousePos.y = e.pageY;
 
@@ -870,7 +872,6 @@ SX.scrollToMainStatic = function(){
         .on('enter', function(){
             scrollToHistory();
         })
-        .addIndicators()
         .addTo(controllerStatic);
 
         const sceneOut = new ScrollMagic.Scene({
@@ -880,7 +881,6 @@ SX.scrollToMainStatic = function(){
         .on('leave', function(){
             scrollToLegacy();
         })
-        .addIndicators()
         .addTo(controllerStatic);
     }
 };
