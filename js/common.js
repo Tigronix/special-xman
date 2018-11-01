@@ -35,20 +35,20 @@ SX.legacyOnScrollAnimation = function() {
     const header = '.page-header';
     let xColorIn = '#1c1b1b';
     let xColorLeave = '#00bcd4';
-    let logoTextShadow = '-1px 0 #ff5722, 0 1px #ff5722, 1px 0 #ff5722, 0 -1px #ff5722';
     let logoPosition = '-100';
     let menuPosition = '53';
     let xScale = '10';
     let h1Position = '-2000';
 
+    let els = document.querySelectorAll(".js-splitme");
+    [].forEach.call(els, function(el) {
+        el.outerHTML = Splitter(el.outerHTML, '<span class="letter">$</span>');
+    });
+
     if(atMobile.matches){
         logoPosition = 0;
         menuPosition = 30;
         xScale = 1;
-    }
-
-    if($globalWrapper.hasClass(pageStatic)){
-        logoTextShadow = '';
     }
 
     if($globalWrapper.hasClass(pagePeople)){
@@ -72,7 +72,7 @@ SX.legacyOnScrollAnimation = function() {
         const tweenIn = function(){
             return tlOnEnterScrollAnimation
             .to('.scroll-section', 0.1, {zIndex:'200'})
-            .to('.legacy__x', 2, {scale: xScale, ease: animationDuration})
+            .to('.legacy__x', 1, {scale: xScale, ease: animationDuration})
             .to('.legacy__x', 2, {fill: xColorIn, ease: animationDuration}, '-=3')
             .to('.legacy--main', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
             .to('.scroll-section__fake-block', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
@@ -84,14 +84,14 @@ SX.legacyOnScrollAnimation = function() {
         const tweenOut = function(){
             return tlOnLeaveScrollAnimation
             .to('.scroll-section', 0.1, {zIndex:'0'})
-            .to('.legacy__x', 2, {scale:'1', x:'-50%', ease: animationDuration})
+            .to('.legacy__x', 1, {scale:'1', x:'-50%', ease: animationDuration})
             .to('.legacy__x', 2, {fill: xColorLeave, ease: animationDuration}, '-=2.5')
             .to('.legacy--main', 2, {backgroundColor:'#ff5722', ease: animationDuration}, '-=2')
             .to('.scroll-section__fake-block', 2, {backgroundColor:'#00bcd4', ease: animationDuration}, '-=2')
-            .to('.legacy__h1', 2, {x:'0', ease: animationDuration}, '-=2')
+            .to('.legacy__h1', 0.1, {x:'0'}, '-=2')
+            .staggerFromTo('.legacy__h1 .letter', 0.3, {y:'150', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.09)
             .fromTo(menu, 1, {top: '-20'}, {top:'0', zIndex: '', position:'relative', ease: animationDuration}, '-=2')
-            .to('.menu__link', 0.1, {textShadow:'-1px 0 #00bcd4, 0 1px #00bcd4, 1px 0 #00bcd4, 0 -1px #00bcd4', ease: animationDuration}, '-=2')
-            .to('.logo', 2, {textShadow: logoTextShadow, ease: animationDuration}, '-=2')
+            .to('.menu__link', 0.1, {ease: animationDuration}, '-=2')
             .to('.logo', 1, {y:'0', ease: animationDuration}, '-=2')
             ;
         };
@@ -128,8 +128,6 @@ SX.scrollToMainContent = function(){
         const scrollToFirstTitle = function(){
             return new TimelineMax()
             .to(window, 1.5, {scrollTo:scrollToFirstTitleNumber})
-            .to('.menu__link', 0.1, {textShadow:''}, '-=1.5')
-            .to('.logo', 0.1, {textShadow:''}, '-=1.5')
             ;
         };
         if(fromDesktop.matches){
@@ -389,6 +387,7 @@ SX.peopleSlider = function() {
             items: 1,
             loop: true,
             navElement: 'button',
+            smartSpeed: 1000,
             responsive: {
                 0: {
                     dots: false,
@@ -418,19 +417,6 @@ SX.peopleSlider = function() {
 SX.historySlider = function() {
      const historyTypeSlider = '.history__type-slider';
      const historySlider = '.history__slider';
-
-	const historySliderInit = function(){
-    	if(historySlider){
-            $(historySlider).slick({
-              dots: true,
-              arrows: false,
-              infinite: false,
-              slidesToShow: 1,
-              appendDots: '.history__nav-content',
-              draggable: false
-            });
-    	}
-    };
 
     const slickDotsNumbers = function(){
         const dots = $('.history__nav button');
@@ -512,29 +498,36 @@ SX.historySlider = function() {
     };
 
     const nav = function(){
-        const slick = $(historyTypeSlider).slick('getSlick');
         const $btns = $('.history__circle-line');
         const $btnPrev = $('.history__circle-line--prev');
         const $btnNext = $('.history__circle-line--next');
 
         $btnPrev.on('click', function(){
-            const currentColor = $(this).closest('.history').find('.slick-current .slick-current').prev().data('tabitem');
+            const currentColor = $(this).closest('.history').find('.slick-current').prev().data('tabitem');
             if(currentColor === undefined){
-                currentColor = $(this).closest('.history').find('.slick-current .slick-current').data('tabitem');
+                currentColor = $(this).closest('.history').find('.slick-current').data('tabitem');
             }
 
-            $(historyTypeSlider).slick('slickPrev');
+            $(this).closest('.history').find('.history__slide.active .history__type-slider').slick('slickPrev');
             $btns.removeClass('event award people');
             $btns.addClass(currentColor);
         });
 
         $btnNext.on('click', function(){
-            const currentColor = $(this).closest('.history').find('.slick-current .slick-current').next().data('tabitem');
+            const currentColor = $(this).closest('.history').find('.slick-current').next().data('tabitem');
             if(currentColor === undefined){
-                currentColor = $(this).closest('.history').find('.slick-current .slick-current').data('tabitem');
+                currentColor = $(this).closest('.history').find('.slick-current').data('tabitem');
             }
 
-            $(historyTypeSlider).slick('slickNext');
+            $(this).closest('.history').find('.history__slide.active .history__type-slider').slick('slickNext');
+            $btns.removeClass('event award people');
+            $btns.addClass(currentColor);
+        });
+
+        $('.history__nav-btn').on('click', function(){
+            const dataName = $(this).data('tabnumber');
+            let currentColor = $(this).closest('.history').find('.history__slider .history__slide[data-tabnumber="'+ dataName +'"] .slick-current').data('tabitem');
+
             $btns.removeClass('event award people');
             $btns.addClass(currentColor);
         });
@@ -543,20 +536,18 @@ SX.historySlider = function() {
             $('.history').on('mousewheel DOMMouseScroll', function(e){
               if(typeof e.originalEvent.detail == 'number' && e.originalEvent.detail !== 0) {
                 if(e.originalEvent.detail > 0) {
-                  $(historyTypeSlider).slick('slickNext');
+                  $('.history').find('.history__slide.active .history__type-slider').slick('slickNext');
                 }
               }
             });
 
             $(historyTypeSlider).on('afterChange', function(event, slick, currentSlide, nextSlide){
-              const currentColor = $(this).find('.slick-active').data('tabitem');
-
+              const currentColor = $(this).find('.slick-current').data('tabitem');
               $btns.addClass(currentColor);
             });
         }
     };
 
-    historySliderInit();
     slickDotsNumbers();
     historyTypeSliderInit();
     // syncSliders();
@@ -852,38 +843,88 @@ SX.projector = function(){
 
 SX.scrollToMainStatic = function(){
     const controllerStatic = new ScrollMagic.Controller();
-
-    const scrollToHistory = function(){
-        return new TimelineMax()
-            .to(window, 1.5, {scrollTo: '.history', ease: animationDuration})
-            ;
-    };
-
-    const scrollToLegacy = function(){
-        return new TimelineMax()
-            .to(window, 1.5, {scrollTo: '.legacy', ease: animationDuration})
-            ;
-    };
-
     if(fromDesktop.matches){
-        const sceneIn = new ScrollMagic.Scene({
-            offset: 50
-        })
-        .on('enter', function(){
-            scrollToHistory();
-        })
-        .addTo(controllerStatic);
+        const scrollToHistory = function(){
+            return new TimelineMax()
+                .to(window, 1.5, {scrollTo: '.history'})
+                ;
+        };
 
-        const sceneOut = new ScrollMagic.Scene({
-            triggerElement: '.history',
-            offset: 10,
-        })
-        .on('leave', function(){
-            scrollToLegacy();
-        })
-        .addTo(controllerStatic);
+        const scrollToLegacy = function(){
+            return new TimelineMax()
+                .to(window, 1.5, {scrollTo: '.legacy'})
+                ;
+        };
+
+        $('.global-wrapper--history').each(function(){
+            const sceneIn = new ScrollMagic.Scene({
+                offset: 50
+            })
+            .on('enter', function(){
+                scrollToHistory();
+            })
+            .addTo(controllerStatic);
+
+            const sceneOut = new ScrollMagic.Scene({
+                triggerElement: '.history',
+                offset: 10,
+            })
+            .on('leave', function(){
+                scrollToLegacy();
+            })
+            .addTo(controllerStatic);
+        });
+        $('.global-wrapper--people').each(function(){
+            const scrollToHistory = function(){
+                return new TimelineMax()
+                    .to(window, 1.5, {scrollTo: '.people-slider'})
+                    ;
+            };
+
+            const scrollToLegacy = function(){
+                return new TimelineMax()
+                    .to(window, 1.5, {scrollTo: '.legacy'})
+                    ;
+            };
+
+            const sceneIn = new ScrollMagic.Scene({
+                offset: 50
+            })
+            .on('enter', function(){
+                scrollToHistory();
+            })
+            .addTo(controllerStatic);
+
+            const sceneOut = new ScrollMagic.Scene({
+                triggerElement: '.people-slider',
+                offset: 10,
+            })
+            .on('leave', function(){
+                scrollToLegacy();
+            })
+            .addTo(controllerStatic);
+        });
     }
 };
+
+SX.universalTabs = function(){
+    $(document).on('click', '[data-tabclass]', function onClick() {
+        const $this = $(this);
+        const content = $this.data('tabclass');
+        const number = $this.data('tabnumber');
+
+        $('[data-tabclass="' + content + '"]').each(function each() {
+            const $element = $(this);
+
+            if ($element.data('tabnumber') === number) {
+                $element.addClass('active animated').siblings().removeClass('active animated');
+            }
+        });
+
+        $('.' + content + ' > [data-tabnumber="' + number + '"]').css({'height':'auto', 'visibility':'visible', 'overflow': 'visible'}).addClass('active animated').siblings().css({'height':'0', 'visibility':'hidden', 'overflow': 'hidden'}).removeClass('active animated');
+    });
+};
+
 $(function onPageReady(){
     SX.legacyOnLoadAnimation();
     SX.legacyStaticHover();
@@ -902,11 +943,12 @@ $(function onPageReady(){
     SX.adaptiveBg();
     SX.browserDetect();
     SX.scrollToMainStatic();
+    SX.projector();
+    SX.universalTabs();
 
     // custom cursor необходимо запускать последним
     SX.cursorAddClassToActiveElems();
     SX.customCursor();
-    SX.projector();
 })
 
 new Vue({

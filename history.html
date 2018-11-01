@@ -19,48 +19,43 @@
 	</div>
 	<section class="global-wrapper global-wrapper--static global-wrapper--history">
 		<div class="cursor"></div>
-		<header class="page-header">
-			<a href="index.html" class="logo">
-				<svg class="icon icon-logo"><use xlink:href="#icon-logo"></use></svg>
-				<span class="logo__desc">digital agency</span>
-			</a>
-			<div class="history__menu">
-				<button type="button" data-tabparent="history__type-slider" data-tabitem="event" class="history__btn history__btn--event activeHistory">события</button>
-				<button type="button" data-tabparent="history__type-slider" data-tabitem="award" class="history__btn history__btn--award activeHistory">награды</button>
-				<button type="button" data-tabparent="history__type-slider" data-tabitem="people" class="history__btn history__btn--people activeHistory">люди</button>
-			</div>
-			<div class="social">
-				<a href="#" class="social__link">
-					<svg class="icon icon-vk"><use xlink:href="#icon-vk"></use></svg>
-				</a>
-				<a href="#" class="social__link">
-					<svg class="icon icon-facebook"><use xlink:href="#icon-facebook"></use></svg>
-				</a>
-				<a href="#" class="social__link">
-					<svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
-				</a>
-				<a href="#" class="social__link">
-					<svg class="icon icon-instagram"><use xlink:href="#icon-instagram"></use></svg>
-				</a>
-				<button type="button" class="social__link-all social__link-all--social">
-					<img class="social__open " src="img/share.png" alt="">
-				</button>
-				<button type="button" class="social__link-all social__link-all--filter">
-					<svg class="social__open icon icon-filter"><use xlink:href="#icon-filter"></use></svg>
-				</button>
-				<div class="social__close hover mouseDown">
-					<svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg>
-				</div>
-			</div>
-		</header>
 		<main class="main overflow">
-			<section class="menu menu--static">
+			<header class="page-header page-header__show-mobile">
+				<a href="index.html" class="logo">
+					<svg class="icon icon-logo"><use xlink:href="#icon-logo"></use></svg>
+					<span class="logo__desc">digital agency</span>
+				</a>
+				<div class="social">
+					<a href="#" class="social__link">
+						<svg class="icon icon-vk"><use xlink:href="#icon-vk"></use></svg>
+					</a>
+					<a href="#" class="social__link">
+						<svg class="icon icon-facebook"><use xlink:href="#icon-facebook"></use></svg>
+					</a>
+					<a href="#" class="social__link">
+						<svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
+					</a>
+					<a href="#" class="social__link">
+						<svg class="icon icon-instagram"><use xlink:href="#icon-instagram"></use></svg>
+					</a>
+					<button type="button" class="social__link-all social__link-all--social">
+						<img class="social__open " src="img/share.png" alt="">
+					</button>
+					<button type="button" class="social__link-all social__link-all--filter">
+						<svg class="social__open icon icon-filter"><use xlink:href="#icon-filter"></use></svg>
+					</button>
+					<div class="social__close hover mouseDown">
+						<svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg>
+					</div>
+				</div>
+			</header>
+			<section class="menu menu--static show-mobile">
 				<a href="history.html" class="menu__link">история</a>
 				<a href="people.html" class="menu__link">люди х</a>
 				<a href="gallery.html" class="menu__link">галерея</a>
 			</section>
 			<section id="legacy" class="legacy legacy--people">
-    			<div class="xray"></div>
+				<div class="xray"></div>
 				<div class="legacy__content">
 					<h1 class="legacy__h1">
 						история
@@ -74,10 +69,49 @@
 						скролл
 					</div>
 					<img class="scroll-me__icon" src="img/arr-down.svg" alt="">
+
 				</div>
 			</section>
 			<section id="history" class="history">
-				<div class="cursor"></div>
+				<header class="page-header history__hide-mobile">
+					<a href="index.html" class="logo">
+        				<svg class="icon icon-logo"><use xlink:href="#icon-logo"></use></svg>
+        				<span class="logo__desc">digital agency</span>
+        			</a>
+					<div class="social">
+						<a href="#" class="social__link">
+        					<svg class="icon icon-vk"><use xlink:href="#icon-vk"></use></svg>
+        				</a>
+						<a href="#" class="social__link">
+        					<svg class="icon icon-facebook"><use xlink:href="#icon-facebook"></use></svg>
+        				</a>
+						<a href="#" class="social__link">
+        					<svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
+        				</a>
+						<a href="#" class="social__link">
+        					<svg class="icon icon-instagram"><use xlink:href="#icon-instagram"></use></svg>
+        				</a>
+						<button type="button" class="social__link-all social__link-all--social">
+        					<img class="social__open " src="img/share.png" alt="">
+        				</button>
+						<button type="button" class="social__link-all social__link-all--filter">
+        					<svg class="social__open icon icon-filter"><use xlink:href="#icon-filter"></use></svg>
+        				</button>
+						<div class="social__close hover mouseDown">
+							<svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg>
+						</div>
+					</div>
+				</header>
+				<div class="history__menu">
+					<button type="button" data-tabparent="history__type-slider" data-tabitem="event" class="history__btn history__btn--event activeHistory">события</button>
+					<button type="button" data-tabparent="history__type-slider" data-tabitem="award" class="history__btn history__btn--award activeHistory">награды</button>
+					<button type="button" data-tabparent="history__type-slider" data-tabitem="people" class="history__btn history__btn--people activeHistory">люди</button>
+				</div>
+				<section class="menu menu--static history__hide-mobile">
+					<a href="history.html" class="menu__link">история</a>
+					<a href="people.html" class="menu__link">люди х</a>
+					<a href="gallery.html" class="menu__link">галерея</a>
+				</section>
 				<button type="button" class="history__circle-line history__circle-line--prev event">
 					<div class="history__circle-line-item history__circle-line-item--1"></div>
 					<div class="history__circle-line-item history__circle-line-item--2"></div>
@@ -89,108 +123,222 @@
 					<div class="history__circle-line-item history__circle-line-item--3"></div>
 				</button>
 				<div class="history__slider">
-					<div class="history__slide">
+					<div class="history__slide active" data-tabnumber="2008">
 						<div class="history__slide-wrapper">
-    						<div class="history__year">2008</div>
-    						<div class="history__type-slider">
+							<div class="history__year">2008</div>
+							<div class="history__type-slider">
 								<div data-tabitem="event" class="history__type-slider-slide-wrapper">
-		                            <a data-lightbox="roadtrip" data-bg-mobile="img/gallery-img.jpg" data-bg-vertical-tablet="img/gallery-img.jpg" data-bg-horizontal-tablet="img/gallery-img.jpg" data-bg-desktop="img/gallery-img.jpg" href="img/gallery-img.jpg" class="history__img js-adaptive-bg">
+									<a data-lightbox="roadtrip" data-bg-mobile="img/gallery-img.jpg" data-bg-vertical-tablet="img/gallery-img.jpg" data-bg-horizontal-tablet="img/gallery-img.jpg" data-bg-desktop="img/gallery-img.jpg" href="img/gallery-img.jpg" class="history__img js-adaptive-bg">
 		    							<img class="js-cursor-hover" src="img/history.png" alt="">
 		    						</a>
-	    							<div class="history__type-slider-item-wrap">
+									<div class="history__type-slider-item-wrap">
 										<div class="history__type-slider-item">
-		    								<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100 приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
-		    							</div>
-	    							</div>
-								</div>
-								<div data-tabitem="event" class="history__type-slider-slide-wrapper">
-		                            <a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
-		    							<img class="js-cursor-hover" src="img/history.png" alt="">
-		    						</a>
-	    							<div class="history__type-slider-item-wrap">
-										<div class="history__type-slider-item">
-		    								<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100 приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
-		    							</div>
-	    							</div>
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
 								</div>
 								<div data-tabitem="event" class="history__type-slider-slide-wrapper">
-		                            <a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
 		    							<img class="js-cursor-hover" src="img/history.png" alt="">
 		    						</a>
-	    							<div class="history__type-slider-item-wrap">
+									<div class="history__type-slider-item-wrap">
 										<div class="history__type-slider-item">
-		    								<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100 приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
-		    							</div>
-	    							</div>
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+								<div data-tabitem="event" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
 								</div>
 								<div data-tabitem="award" class="history__type-slider-slide-wrapper">
-		                            <a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
 		    							<img class="js-cursor-hover" src="img/history.png" alt="">
 		    						</a>
-	    							<div class="history__type-slider-item-wrap">
+									<div class="history__type-slider-item-wrap">
 										<div class="history__type-slider-item">
-		    								<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100 приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
-		    							</div>
-	    							</div>
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
 								</div>
 								<div data-tabitem="award" class="history__type-slider-slide-wrapper">
-		                            <a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
 		    							<img class="js-cursor-hover" src="img/history.png" alt="">
 		    						</a>
-	    							<div class="history__type-slider-item-wrap">
+									<div class="history__type-slider-item-wrap">
 										<div class="history__type-slider-item">
-		    								<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100 приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
-		    							</div>
-	    							</div>
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
 								</div>
 								<div data-tabitem="award" class="history__type-slider-slide-wrapper">
-		                            <a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
 		    							<img class="js-cursor-hover" src="img/history.png" alt="">
 		    						</a>
-	    							<div class="history__type-slider-item-wrap">
+									<div class="history__type-slider-item-wrap">
 										<div class="history__type-slider-item">
-		    								<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100 приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
-		    							</div>
-	    							</div>
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
 								</div>
 								<div data-tabitem="people" class="history__type-slider-slide-wrapper">
-		                            <a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
 		    							<img class="js-cursor-hover" src="img/history.png" alt="">
 		    						</a>
-	    							<div class="history__type-slider-item-wrap">
+									<div class="history__type-slider-item-wrap">
 										<div class="history__type-slider-item">
-		    								<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100 приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
-		    							</div>
-	    							</div>
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
 								</div>
 								<div data-tabitem="people" class="history__type-slider-slide-wrapper">
-		                            <a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
 		    							<img class="js-cursor-hover" src="img/history.png" alt="">
 		    						</a>
-	    							<div class="history__type-slider-item-wrap">
+									<div class="history__type-slider-item-wrap">
 										<div class="history__type-slider-item">
-		    								<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100 приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
-		    							</div>
-	    							</div>
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
 								</div>
 								<div data-tabitem="people" class="history__type-slider-slide-wrapper">
-		                            <a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
 		    							<img class="js-cursor-hover" src="img/history.png" alt="">
 		    						</a>
-	    							<div class="history__type-slider-item-wrap">
+									<div class="history__type-slider-item-wrap">
 										<div class="history__type-slider-item">
-		    								<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100 приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
-		    							</div>
-	    							</div>
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
 								</div>
-    						</div>
-                        </div>
+							</div>
+						</div>
 					</div>
-
-
+					<div class="history__slide" data-tabnumber="2009">
+						<div class="history__slide-wrapper">
+							<div class="history__year">2008</div>
+							<div class="history__type-slider">
+								<div data-tabitem="event" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" data-bg-mobile="img/gallery-img.jpg" data-bg-vertical-tablet="img/gallery-img.jpg" data-bg-horizontal-tablet="img/gallery-img.jpg" data-bg-desktop="img/gallery-img.jpg" href="img/gallery-img.jpg" class="history__img js-adaptive-bg">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+								<div data-tabitem="event" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+								<div data-tabitem="event" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+								<div data-tabitem="award" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+								<div data-tabitem="award" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+								<div data-tabitem="award" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+								<div data-tabitem="people" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+								<div data-tabitem="people" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+								<div data-tabitem="people" class="history__type-slider-slide-wrapper">
+									<a data-lightbox="roadtrip" href="img/gallery-img.jpg" class="history__img">
+		    							<img class="js-cursor-hover" src="img/history.png" alt="">
+		    						</a>
+									<div class="history__type-slider-item-wrap">
+										<div class="history__type-slider-item">
+											<p>Успешно реализовали проект продвижения в социальных сетях концерта группы Prodigy в Минске. Таргетированной рекламы вконтакте тогда не было. Сначала нам пришлось создать более 100 фэйк-аккаунтов, чтобы обойти ограничение на 100
+												приглашений от пользователя в сутки. Потом нашли в каждом городе лидеров молодежной тусовки, которых сделали официальными представителями.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="history__nav">
-					<div class="history__nav-content"></div>
+					<button type="button" class="history__nav-btn animated" data-tabclass="history__slider" data-tabnumber="2008">2008</button>
+					<button type="button" class="history__nav-btn" data-tabclass="history__slider" data-tabnumber="2009">2009</button>
 				</div>
 			</section>
 		</main>
