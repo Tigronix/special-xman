@@ -90,7 +90,7 @@ SX.legacyOnScrollAnimation = function() {
             .to('.scroll-section__fake-block', 2, {backgroundColor:'#00bcd4', ease: animationDuration}, '-=2')
             .to('.legacy__h1', 0.1, {x:'0'}, '-=2')
             .staggerFromTo('.legacy__h1 .letter', 0.3, {y:'150', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.09)
-            .fromTo(menu, 1, {top: '-20'}, {top:'0', zIndex: '', position:'relative', ease: animationDuration}, '-=2')
+            .fromTo(menu, 1, {top: '-20'}, {top:'0', zIndex: '3000', position:'relative', ease: animationDuration}, '-=2')
             .to('.menu__link', 0.1, {ease: animationDuration}, '-=2')
             .to('.logo', 1, {y:'0', ease: animationDuration}, '-=2')
             ;
@@ -534,10 +534,11 @@ SX.historySlider = function() {
 
         if(fromDesktop.matches){
             $('.history').on('mousewheel DOMMouseScroll', function(e){
-              if(typeof e.originalEvent.detail == 'number' && e.originalEvent.detail !== 0) {
-                if(e.originalEvent.detail > 0) {
+
+              if(typeof e.originalEvent.detail == 'number') {
+                  console.log(e.originalEvent.detail);
+
                   $('.history').find('.history__slide.active .history__type-slider').slick('slickNext');
-                }
               }
             });
 
