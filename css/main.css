@@ -933,7 +933,8 @@ a {
   .ie11 .global-wrapper--static .legacy__x:hover, .ie11 .global-wrapper--static .legacy__x--hover {
     fill: #ff5722 !important; }
   .global-wrapper--static .legacy__h1 {
-    margin-bottom: 150px; }
+    margin-bottom: 150px;
+    overflow: visible; }
   .global-wrapper--static .legacy + section {
     position: relative;
     z-index: 5; }
