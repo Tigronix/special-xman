@@ -1158,7 +1158,7 @@ a {
       margin-bottom: 31px;
       padding-right: 20px; }
       .people-slider__desc p:last-child {
-        margin-bottom: 0; }
+        margin-bottom: 40px; }
     .people-slider__desc blockquote {
       position: relative; }
       .people-slider__desc blockquote:before {
@@ -2480,3 +2480,27 @@ a {
           background-size: cover;
   background-repeat: no-repeat;
   background-position: center; }
+
+.tests {
+  -webkit-animation: hoverPlease 2s infinite;
+          animation: hoverPlease 2s infinite; }
+
+@-webkit-keyframes hoverPlease {
+  from {
+    fill: #ccc;
+    color: #ccc;
+    stroke: #ccc; }
+  to {
+    fill: red;
+    color: red;
+    stroke: red; } }
+
+@keyframes hoverPlease {
+  from {
+    fill: #ccc;
+    color: #ccc;
+    stroke: #ccc; }
+  to {
+    fill: red;
+    color: red;
+    stroke: red; } }

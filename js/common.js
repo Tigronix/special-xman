@@ -8,6 +8,7 @@ const $globalWrapper = $('.global-wrapper');
 const pageStatic = 'global-wrapper--static';
 const pagePeople = 'global-wrapper--people';
 const isIe11 = !!window.MSInputMethodContext && !!document.documentMode;
+const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
 const SX = {};
 
 SX.legacyOnLoadAnimation = function() {
@@ -321,27 +322,58 @@ SX.parallaxHover = function(){
         ;
     };
 
-    $titles.on('mouseenter', function(){
-        parallaxFrontTweenIn();
-        parallaxSideTweenIn();
-        parallaxDownTweenIn();
-    });
-    $titles.on('mouseleave', function(){
-        parallaxFrontTweenOut();
-        parallaxSideTweenOut();
-        parallaxDownTweenOut();
-    });
+    const parallaxSafariIn = function(){
 
-    $links.on('mouseenter', function(){
-        parallaxFrontTweenIn();
-        parallaxSideTweenIn();
-        parallaxDownTweenIn();
-    });
-    $links.on('mouseleave', function(){
-        parallaxFrontTweenOut();
-        parallaxSideTweenOut();
-        parallaxDownTweenOut();
-    });
+        $(svgFront).addClass('tests')
+        $(svgSide).css('fill', sideHover).addClass('tests');
+        $(svgDown).css('fill', downHover).addClass('tests');
+    };
+
+    const parallaxSafariOut = function(){
+        $(svgFront).removeClass('tests');
+        $(svgSide).css('fill', side).removeClass('tests');
+        $(svgDown).css('fill', down).removeClass('tests');
+    };
+
+    if(isSafari){
+        $titles.on('mouseenter', function(){
+            parallaxSafariIn();
+        });
+
+        $titles.on('mouseleave', function(){
+            parallaxSafariOut();
+        });
+
+        $links.on('mouseenter', function(){
+            parallaxSafariIn();
+        });
+
+        $links.on('mouseleave', function(){
+            parallaxSafariOut();
+        });
+    }else{
+        $titles.on('mouseenter', function(){
+            parallaxFrontTweenIn();
+            parallaxSideTweenIn();
+            parallaxDownTweenIn();
+        });
+        $titles.on('mouseleave', function(){
+            parallaxFrontTweenOut();
+            parallaxSideTweenOut();
+            parallaxDownTweenOut();
+        });
+
+        $links.on('mouseenter', function(){
+            parallaxFrontTweenIn();
+            parallaxSideTweenIn();
+            parallaxDownTweenIn();
+        });
+        $links.on('mouseleave', function(){
+            parallaxFrontTweenOut();
+            parallaxSideTweenOut();
+            parallaxDownTweenOut();
+        });
+    }
 };
 
 SX.legacyStaticHover = function(){
@@ -353,24 +385,12 @@ SX.legacyStaticHover = function(){
     const $header = $('.page-header');
 
     if($globalWrapper.hasClass('global-wrapper--static')){
-        // $legacyTitle.on('mouseenter', function(){
-        //     $legacyX.addClass('legacy__x--hover');
-        // });
-        // $legacyTitle.on('mouseleave', function(){
-        //     $legacyX.removeClass('legacy__x--hover');
-        // });
         $legacyContent.on('mouseenter', function(){
             $legacyX.addClass('legacy__x--hover');
         });
         $legacyContent.on('mouseleave', function(){
             $legacyX.removeClass('legacy__x--hover');
         });
-        // $legacyDesc.on('mouseenter', function(){
-        //     $legacyX.addClass('legacy__x--hover');
-        // });
-        // $legacyDesc.on('mouseleave', function(){
-        //     $legacyX.removeClass('legacy__x--hover');
-        // });
     }
 };
 
@@ -822,6 +842,8 @@ SX.adaptiveBg = function(){
 SX.browserDetect = function() {
     if(isIe11){
         $('body').addClass('ie11');
+    }else if(isSafari){
+        $('body').addClass('safari');
     }
 }
 
