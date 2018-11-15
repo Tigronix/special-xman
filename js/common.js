@@ -22,7 +22,7 @@ SX.legacyOnLoadAnimation = function() {
         .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
         .fromTo('.legacy__x', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
         .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-        .staggerFromTo('.menu__link', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
+        .staggerFromTo('.menu__link--animated', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
         .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
         ;
     }
@@ -350,26 +350,27 @@ SX.legacyStaticHover = function(){
     const $legacyX = $('.legacy__x');
     const $legacyTitle = $('.legacy__h1');
     const $legacyDesc = $('.legacy__desc');
+    const $header = $('.page-header');
 
     if($globalWrapper.hasClass('global-wrapper--static')){
-        $legacyTitle.on('mouseenter', function(){
-            $legacyX.addClass('legacy__x--hover');
-        });
-        $legacyTitle.on('mouseleave', function(){
-            $legacyX.removeClass('legacy__x--hover');
-        });
+        // $legacyTitle.on('mouseenter', function(){
+        //     $legacyX.addClass('legacy__x--hover');
+        // });
+        // $legacyTitle.on('mouseleave', function(){
+        //     $legacyX.removeClass('legacy__x--hover');
+        // });
         $legacyContent.on('mouseenter', function(){
             $legacyX.addClass('legacy__x--hover');
         });
         $legacyContent.on('mouseleave', function(){
             $legacyX.removeClass('legacy__x--hover');
         });
-        $legacyDesc.on('mouseenter', function(){
-            $legacyX.addClass('legacy__x--hover');
-        });
-        $legacyDesc.on('mouseleave', function(){
-            $legacyX.removeClass('legacy__x--hover');
-        });
+        // $legacyDesc.on('mouseenter', function(){
+        //     $legacyX.addClass('legacy__x--hover');
+        // });
+        // $legacyDesc.on('mouseleave', function(){
+        //     $legacyX.removeClass('legacy__x--hover');
+        // });
     }
 };
 
