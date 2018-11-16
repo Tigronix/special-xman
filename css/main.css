@@ -2480,27 +2480,3 @@ a {
           background-size: cover;
   background-repeat: no-repeat;
   background-position: center; }
-
-.tests {
-  -webkit-animation: hoverPlease 2s infinite;
-          animation: hoverPlease 2s infinite; }
-
-@-webkit-keyframes hoverPlease {
-  from {
-    fill: #ccc;
-    color: #ccc;
-    stroke: #ccc; }
-  to {
-    fill: red;
-    color: red;
-    stroke: red; } }
-
-@keyframes hoverPlease {
-  from {
-    fill: #ccc;
-    color: #ccc;
-    stroke: #ccc; }
-  to {
-    fill: red;
-    color: red;
-    stroke: red; } }
