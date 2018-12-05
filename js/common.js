@@ -114,39 +114,35 @@ SX.scrollToMainContent = function(){
         const scrollToFirstTitleNumber = fakeBlockOffset + firstFakeItemHeight + humanError;
 
         const scrollToFirstTitle = function(){
-            return new TimelineMax()
-            .to(window, 1.5, {scrollTo:scrollToFirstTitleNumber})
-            ;
+            $([document.documentElement, document.body]).animate({
+                scrollTop: scrollToFirstTitleNumber
+            }, 1500);
         };
 
         const scrollToTop = function(){
-            return new TimelineMax()
-            .to(window, 1.5, {scrollTo: 0})
-            ;
+
+            $([document.documentElement, document.body]).animate({
+                scrollTop: 1
+            }, 1500);
         };
 
         if(fromDesktop.matches){
             const sceneIn = new ScrollMagic.Scene({
             })
-            .setTween()
             .on('enter', function(){
                 tweenIn();
                 scrollToFirstTitle();
             })
-            .addIndicators()
             .offset(60)
             .addTo(controller);
 
             const sceneOut = new ScrollMagic.Scene({
                 triggerElement: '#fakeBlock'
             })
-            .setTween()
             .on('leave', function(){
-                tweenOut();
                 scrollToTop();
-                console.log(123);
+                tweenOut();
             })
-            .addIndicators()
             .offset(390)
             .addTo(controller);
         }
