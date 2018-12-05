@@ -19,19 +19,23 @@ SX.legacyOnLoadAnimation = function() {
     if(pageStatic){
 
     }else{
-        tlOnLoadScrollAnimation
-        .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
-        .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
-        .fromTo('.legacy__x', 0.5, {x:'-50%', y:'-52%', opacity:'0'}, {y:'-50%', x:'-50%', opacity:'1', ease: animationDuration}, '-=0.1')
+        // tlOnLoadScrollAnimation
+        // .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
+        // .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
+        // .fromTo('.legacy__x', 0.5, {x:'-50%', y:'-52%', opacity:'0'}, {y:'-50%', x:'-50%', opacity:'1', ease: animationDuration}, '-=0.1')
         // .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-        .staggerFromTo('.menu__link--animated', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
-        .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-        ;
+        // .staggerFromTo('.menu__link--animated', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
+        // .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
+        // ;
     }
 
 };
 
 SX.legacyOnScrollAnimation = function() {
+
+};
+
+SX.scrollToMainContent = function(){
     const legacyHeight = $('.legacy').innerHeight();
     const menu = '.menu';
     const header = '.page-header';
@@ -41,11 +45,40 @@ SX.legacyOnScrollAnimation = function() {
     let menuPosition = '53';
     let xScale = '10';
     let h1Position = '-2000';
+    const fakeBlock = document.querySelector('#fakeBlock');
+    const tlOnEnterScrollAnimation = new TimelineMax();
+    const tlOnLeaveScrollAnimation = new TimelineMax();
+    let humanError = - 350;
 
     let els = document.querySelectorAll(".js-splitme");
     [].forEach.call(els, function(el) {
         el.outerHTML = Splitter(el.outerHTML, '<span class="letter">$</span>');
     });
+
+    const tweenIn = function(){
+        return tlOnEnterScrollAnimation
+        .to('.scroll-section', 0.1, {zIndex:'200'})
+        .to('.legacy__x', 1, {scale: xScale, ease: animationDuration})
+        .to('.legacy__x', 2, {fill: xColorIn, ease: animationDuration}, '-=3')
+        .to('.legacy--main', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
+        .to('.scroll-section__fake-block', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
+        .to('.legacy__h1', 2, {x: h1Position, ease: animationDuration}, '-=2')
+        .to(menu, 1, {top: menuPosition, zIndex: '10', position:'fixed', ease: animationDuration}, '-=2')
+        ;
+    };
+    const tweenOut = function(){
+        return tlOnLeaveScrollAnimation
+        .to('.scroll-section', 0.1, {zIndex:'0'})
+        .to('.legacy__x', 1, {x:'-50%', y:'-50%', scale:'1', ease: animationDuration})
+        .to('.legacy__x', 2, {fill: xColorLeave, ease: animationDuration}, '-=2.5')
+        .to('.legacy--main', 2, {backgroundColor:'#ff5722', ease: animationDuration}, '-=2')
+        .to('.scroll-section__fake-block', 2, {backgroundColor:'#00bcd4', ease: animationDuration}, '-=2')
+        .to('.legacy__h1', 0.1, {x:'0'}, '-=2')
+        .staggerFromTo('.legacy__h1 .letter', 0.3, {y:'150', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.15)
+        .fromTo(menu, 1, {top: '-20'}, {top:'0', zIndex: '3000', position:'relative', ease: animationDuration}, '-=2')
+        .to('.menu__link', 0.1, {ease: animationDuration}, '-=2')
+        ;
+    };
 
     if(atMobile.matches){
         logoPosition = 0;
@@ -66,54 +99,6 @@ SX.legacyOnScrollAnimation = function() {
         h1Position = 0;
     }
 
-    $(window).on('scroll', function(){
-        const windowOffsetTop = $(header).offset().top;
-        const tlOnEnterScrollAnimation = new TimelineMax();
-        const tlOnLeaveScrollAnimation = new TimelineMax();
-
-        const tweenIn = function(){
-            return tlOnEnterScrollAnimation
-            .to('.scroll-section', 0.1, {zIndex:'200'})
-            .to('.legacy__x', 1, {scale: xScale, ease: animationDuration})
-            .to('.legacy__x', 2, {fill: xColorIn, ease: animationDuration}, '-=3')
-            .to('.legacy--main', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
-            .to('.scroll-section__fake-block', 2, {backgroundColor:'#212121', ease: animationDuration}, '-=2')
-            .to('.legacy__h1', 2, {x: h1Position, ease: animationDuration}, '-=2')
-            .to(menu, 1, {top: menuPosition, zIndex: '10', position:'fixed', ease: animationDuration}, '-=2')
-            ;
-        };
-        const tweenOut = function(){
-            return tlOnLeaveScrollAnimation
-            .to('.scroll-section', 0.1, {zIndex:'0'})
-            .to('.legacy__x', 1, {x:'-50%', y:'-50%', scale:'1', ease: animationDuration})
-            .to('.legacy__x', 2, {fill: xColorLeave, ease: animationDuration}, '-=2.5')
-            .to('.legacy--main', 2, {backgroundColor:'#ff5722', ease: animationDuration}, '-=2')
-            .to('.scroll-section__fake-block', 2, {backgroundColor:'#00bcd4', ease: animationDuration}, '-=2')
-            .to('.legacy__h1', 0.1, {x:'0'}, '-=2')
-            .staggerFromTo('.legacy__h1 .letter', 0.3, {y:'150', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.09)
-            .fromTo(menu, 1, {top: '-20'}, {top:'0', zIndex: '3000', position:'relative', ease: animationDuration}, '-=2')
-            .to('.menu__link', 0.1, {ease: animationDuration}, '-=2')
-            ;
-        };
-
-        if(windowOffsetTop > 100){
-            $(menu).addClass('menu--fixed');
-            if(fromDesktop.matches){
-                tweenIn();
-            }
-        }else if(windowOffsetTop < 99){
-            $(menu).removeClass('menu--fixed');
-            if(fromDesktop.matches){
-                tweenOut();
-            }
-        }
-    });
-};
-
-SX.scrollToMainContent = function(){
-    const fakeBlock = document.querySelector('#fakeBlock');
-    let humanError = - 350;
-
     if(atHorizontalTablet.matches){
         humanError = - 0;
     }else if(atVerticalTablet.matches){
@@ -133,15 +118,37 @@ SX.scrollToMainContent = function(){
             .to(window, 1.5, {scrollTo:scrollToFirstTitleNumber})
             ;
         };
+
+        const scrollToTop = function(){
+            return new TimelineMax()
+            .to(window, 1.5, {scrollTo: 0})
+            ;
+        };
+
         if(fromDesktop.matches){
-            const scene = new ScrollMagic.Scene({
+            const sceneIn = new ScrollMagic.Scene({
             })
             .setTween()
             .on('enter', function(){
+                tweenIn();
                 scrollToFirstTitle();
             })
+            .addIndicators()
+            .offset(60)
             .addTo(controller);
-            scene.offset(60);
+
+            const sceneOut = new ScrollMagic.Scene({
+                triggerElement: '#fakeBlock'
+            })
+            .setTween()
+            .on('leave', function(){
+                tweenOut();
+                scrollToTop();
+                console.log(123);
+            })
+            .addIndicators()
+            .offset(390)
+            .addTo(controller);
         }
     }
 };
