@@ -23,7 +23,7 @@ SX.legacyOnLoadAnimation = function() {
         .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
         .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
         .fromTo('.legacy__x', 0.5, {x:'-50%', y:'-52%', opacity:'0'}, {y:'-50%', x:'-50%', opacity:'1', ease: animationDuration}, '-=0.1')
-        .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
+        // .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
         .staggerFromTo('.menu__link--animated', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
         .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
         ;
@@ -497,18 +497,22 @@ SX.historySlider = function() {
         $btn.each(function(){
             $(this).on('click', function(){
                 $(this).toggleClass('activeHistory');
-                $('.activeHistory').each(function(i, it){
-                    if(i === 0){
-                        $(it).addClass('activeHistory');
-                    }
-                });
+                const activeBtnsLength = $('.activeHistory').length;
+                console.log(activeBtnsLength);
+                if(activeBtnsLength !== 0){
+                    $('.activeHistory').each(function(i, it){
+                        if(i === 0){
+                            $(it).addClass('activeHistory');
+                        }
+                    });
 
-                let slidesToKeep = [];
-                filter(slidesToKeep);
-                let slideFilter = slidesToKeep.join(', ');
+                    let slidesToKeep = [];
+                    filter(slidesToKeep);
+                    let slideFilter = slidesToKeep.join(', ');
 
-                $(historyTypeSlider).slick('slickUnfilter');
-                $(historyTypeSlider).slick('slickFilter', slideFilter);
+                    $(historyTypeSlider).slick('slickUnfilter');
+                    $(historyTypeSlider).slick('slickFilter', slideFilter);
+                }
             });
         });
 

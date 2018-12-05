@@ -209,6 +209,8 @@ a {
       -ms-flex-align: start;
           align-items: flex-start;
   padding: 0 80px; }
+  .page-header__show-mobile {
+    z-index: 3500 !important; }
   @media screen and (max-width: 1439px) {
     .page-header {
       padding: 0 50px; } }
