@@ -2,8 +2,8 @@ const animationDuration = 'cubic-bezier(.43,0,.03,1)';
 const controller = new ScrollMagic.Controller();
 const fromDesktop = window.matchMedia("(min-width: 1440px)");
 const atHorizontalTablet = window.matchMedia("(max-width: 1439px) and (min-width: 1024px)");
-const atVerticalTablet = window.matchMedia("(max-width: 1023px) and (min-width: 769px)");
-const atMobile = window.matchMedia("(max-width: 768px)");
+const atVerticalTablet = window.matchMedia("(max-width: 1023px) and (min-width: 768px)");
+const atMobile = window.matchMedia("(max-width: 767px)");
 const $globalWrapper = $('.global-wrapper');
 const pageStatic = 'global-wrapper--static';
 const pagePeople = 'global-wrapper--people';
@@ -328,15 +328,15 @@ SX.customCursor = function() {
     });
 
     $('.mouseDown').mousedown(function() {
-        $(this).addClass('active');
+        $(this).addClass('activeMouse');
     });
 
     $('.mouseDown').mouseup(function() {
-        $(this).removeClass('active');
+        $(this).removeClass('activeMouse');
     });
 
     $('.mouseDown').mouseleave(function() {
-        $(this).removeClass('active');
+        $(this).removeClass('activeMouse');
     });
 };
 
@@ -755,8 +755,9 @@ SX.filterMenu = function() {
     if (historyElem && fromDesktop.matches) {
         const historyOffsetTop = $(history).offset().top;
 
-        const tweenIn = function() {
+        const tweenIn =
             new TimelineMax()
+                .stop()
                 .staggerFromTo(menuLinks, 0.5, {
                     y: '0',
                     opacity: '1'
@@ -773,7 +774,7 @@ SX.filterMenu = function() {
                     opacity: '1',
                     ease: animationDuration
                 }, 0.1);
-        };
+        ;
 
         const tweenOut = function() {
             new TimelineMax()
@@ -799,10 +800,10 @@ SX.filterMenu = function() {
                 triggerElement: '#history',
             })
             .on('enter', function() {
-                tweenIn();
+                tweenIn.play();
             })
             .on('leave', function() {
-                tweenOut();
+                tweenIn.reverse();
             })
             .addTo(controller);
     }
@@ -853,7 +854,7 @@ SX.socialMenu = function() {
         const $historyBtn = $('.history__btn');
         const $social = $('.social');
 
-        if (atVerticalTablet.matches) {
+        if (atVerticalTablet.matches | atMobile.matches) {
             const historyMenu = new TimelineMax()
                 .staggerFromTo($btns, 0.5, {
                     y: '0',
@@ -906,16 +907,6 @@ SX.socialMenu = function() {
                 });
             historyMenu.stop();
 
-            $btnFilter.on('click', function() {
-                $(this).addClass('activeOpen');
-                const checked = $(this).hasClass('activeOpen');
-
-                if (checked) {
-                    historyMenu.play();
-                }
-            });
-        }
-        if (atVerticalTablet.matches | atMobile.matches) {
             const menu = new TimelineMax()
                 .staggerFromTo($btns, 0.5, {
                     y: '0',
@@ -963,6 +954,7 @@ SX.socialMenu = function() {
                 }, 0.1);
             menu.stop();
 
+
             $btnMenu.on('click', function() {
                 $(this).addClass('activeOpen');
                 $social.addClass('active');
@@ -974,11 +966,24 @@ SX.socialMenu = function() {
                 }
             });
 
+            $btnFilter.on('click', function() {
+                $(this).addClass('activeOpen');
+                const checked = $(this).hasClass('activeOpen');
+                if (checked) {
+                    historyMenu.play();
+                }
+            });
+
             $('.social__close').on('click', function() {
                 if ($btnMenu.hasClass('activeOpen')) {
                     $btnMenu.removeClass('activeOpen');
                     $social.removeClass('active');
                     menu.reverse();
+                }
+
+                if ($btnFilter.hasClass('activeOpen')) {
+                    $btnFilter.removeClass('activeOpen');
+                    historyMenu.reverse();
                 }
             });
         }
@@ -1010,14 +1015,22 @@ SX.socialMenu = function() {
                     historyMenuMobile.reverse();
                 })
                 .addTo(controller);
+
+            $('.social__close').on('click', function() {
+                if ($btnMenu.hasClass('activeOpen')) {
+                    $btnMenu.removeClass('activeOpen');
+                    $social.removeClass('active');
+                    menu.reverse();
+                }
+
+                if ($btnFilter.hasClass('activeOpen')) {
+                    $btnFilter.removeClass('activeOpen');
+                    historyMenu.reverse();
+                }
+            });
         }
 
-        $('.social__close').on('click', function() {
-            if ($btnFilter.hasClass('activeOpen')) {
-                $btnFilter.removeClass('activeOpen');
-                historyMenu.reverse();
-            }
-        });
+
     });
 };
 
