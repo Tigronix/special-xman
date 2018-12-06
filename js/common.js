@@ -1,6 +1,7 @@
 const animationDuration = 'cubic-bezier(.43,0,.03,1)';
 const controller = new ScrollMagic.Controller();
 const fromDesktop = window.matchMedia("(min-width: 1440px)");
+const fromHorizontalTablet = window.matchMedia("(min-width: 1024px)");
 const atHorizontalTablet = window.matchMedia("(max-width: 1439px) and (min-width: 1024px)");
 const atVerticalTablet = window.matchMedia("(max-width: 1023px) and (min-width: 768px)");
 const atMobile = window.matchMedia("(max-width: 767px)");
@@ -752,7 +753,7 @@ SX.filterMenu = function() {
     const historyElem = document.querySelector('.history');
     const header = ('.page-header');
 
-    if (historyElem && fromDesktop.matches) {
+    if (historyElem && fromHorizontalTablet.matches) {
         const historyOffsetTop = $(history).offset().top;
 
         const tweenIn =
@@ -775,37 +776,19 @@ SX.filterMenu = function() {
                     ease: animationDuration
                 }, 0.1);
         ;
+        if(fromHorizontalTablet.matches){
+            const scene = new ScrollMagic.Scene({
+                    triggerElement: '#history',
+                })
+                .on('enter', function() {
+                    tweenIn.play();
+                })
+                .on('leave', function() {
+                    tweenIn.reverse();
+                })
+                .addTo(controller);
+        }
 
-        const tweenOut = function() {
-            new TimelineMax()
-                .staggerFromTo(filterMenuLinks, 0.5, {
-                    y: '0',
-                    opacity: '1'
-                }, {
-                    y: '-80',
-                    opacity: '0',
-                    ease: animationDuration
-                }, 0.1)
-                .staggerFromTo(menuLinks, 0.5, {
-                    y: '-80',
-                    opacity: '0'
-                }, {
-                    y: '0',
-                    opacity: '1',
-                    ease: animationDuration
-                }, 0.1);
-        };
-
-        const scene = new ScrollMagic.Scene({
-                triggerElement: '#history',
-            })
-            .on('enter', function() {
-                tweenIn.play();
-            })
-            .on('leave', function() {
-                tweenIn.reverse();
-            })
-            .addTo(controller);
     }
 };
 
