@@ -1,6 +1,7 @@
 const animationDuration = 'cubic-bezier(.43,0,.03,1)';
 const controller = new ScrollMagic.Controller();
 const fromDesktop = window.matchMedia("(min-width: 1440px)");
+const fromVerticalTablet = window.matchMedia("(min-width: 768px)");
 const fromHorizontalTablet = window.matchMedia("(min-width: 1024px)");
 const atHorizontalTablet = window.matchMedia("(max-width: 1439px) and (min-width: 1024px)");
 const atVerticalTablet = window.matchMedia("(max-width: 1023px) and (min-width: 768px)");
@@ -22,19 +23,15 @@ SX.legacyOnLoadAnimation = function() {
     if (pageStatic) {
 
     } else {
-        // tlOnLoadScrollAnimation
-        // .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
-        // .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
-        // .fromTo('.legacy__x', 0.5, {x:'-50%', y:'-52%', opacity:'0'}, {y:'-50%', x:'-50%', opacity:'1', ease: animationDuration}, '-=0.1')
-        // .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-        // .staggerFromTo('.menu__link--animated', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
-        // .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-        // ;
+        tlOnLoadScrollAnimation
+        .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
+        .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
+        .fromTo('.legacy__x', 0.5, {x:'-50%', y:'-52%', opacity:'0'}, {y:'-50%', x:'-50%', opacity:'1', ease: animationDuration}, '-=0.1')
+        .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
+        .staggerFromTo('.menu__link--animated', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
+        .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
+        ;
     }
-
-};
-
-SX.legacyOnScrollAnimation = function() {
 
 };
 
@@ -42,6 +39,8 @@ SX.scrollToMainContent = function() {
     const legacyHeight = $('.legacy').innerHeight();
     const menu = '.menu';
     const header = '.page-header';
+    const $scrollBtnMain = $('.scroll-me--main');
+    const $scrollBtnStatic = $('.scroll-me--static');
     let xColorIn = '#1c1b1b';
     let xColorLeave = '#00bcd4';
     let logoPosition = '-100';
@@ -63,34 +62,46 @@ SX.scrollToMainContent = function() {
             .to('.scroll-section', 0.1, {
                 zIndex: '200'
             })
+            .to('.menu--legacy', 0.1, {
+                display: 'none'
+            }, '-=2')
+            .to('.menu--header', 0.1, {
+                display: 'flex'
+            }, '-=2')
+            .staggerFromTo('.menu--header .menu__link', 0.3, {
+                y: '-30',
+                opacity: '0'
+            }, {
+                y: '0',
+                opacity: '1',
+                ease: animationDuration
+            }, '0.15')
             .to('.legacy__x', 3, {
                 scale: 10,
                 ease: animationDuration
-            })
+            }, '-=0.6')
             .to('.legacy__x', 2, {
                 fill: '#212121',
                 ease: animationDuration
-            }, '-=5')
+            }, '-=5.6')
             .to('.global-wrapper--main', 2, {
                 backgroundColor: '#212121',
                 ease: animationDuration
-            }, '-=5')
+            }, '-=5.6')
             .to('.legacy__h1', 2, {
                 x: h1Position,
                 ease: animationDuration
-            }, '-=2')
-            .to(menu, 1, {
-                top: menuPosition,
-                zIndex: '10',
-                position: 'fixed',
-                ease: animationDuration
-            }, '-=2');
+            }, '-=2.6')
+            ;
     };
     const tweenOut = function() {
         return tlOnLeaveScrollAnimation
             .to('.scroll-section', 0.1, {
                 zIndex: '0'
             })
+            .to('.menu--header', 0.1, {
+                display: 'none'
+            }, '-=2')
             .to('.legacy__x', 2, {
                 x: '-50%',
                 y: '-50%',
@@ -116,17 +127,17 @@ SX.scrollToMainContent = function() {
                 opacity: '1',
                 ease: animationDuration
             }, 0.15)
-            .fromTo(menu, 1, {
-                top: '-20'
-            }, {
-                top: '0',
-                zIndex: '3000',
-                position: 'relative',
-                ease: animationDuration
+            .to('.menu--legacy', 0.1, {
+                display:'flex'
             }, '-=2')
-            .to('.menu__link', 0.1, {
+            .staggerFromTo('.menu--legacy .menu__link', 0.3, {
+                y: '-30',
+                opacity: '0'
+            }, {
+                y: '0',
+                opacity: '1',
                 ease: animationDuration
-            }, '-=2');
+            }, '0.15')
     };
 
     if (atMobile.matches) {
@@ -169,11 +180,14 @@ SX.scrollToMainContent = function() {
         };
 
         const scrollToTop = function() {
-
             $([document.documentElement, document.body]).animate({
                 scrollTop: 1
             }, 1500);
         };
+
+        $scrollBtnMain.on('click', function(){
+            scrollToFirstTitle();
+        });
 
         if (fromDesktop.matches) {
             const sceneIn = new ScrollMagic.Scene({})
@@ -195,6 +209,14 @@ SX.scrollToMainContent = function() {
                 .addTo(controller);
         }
     }
+
+    $scrollBtnStatic.on('click', function(){
+        const nextBlockOffsetTop = $(this).closest('.legacy').next().offset().top;
+
+        $([document.documentElement, document.body]).animate({
+            scrollTop: nextBlockOffsetTop
+        }, 1500);
+    });
 };
 
 SX.mainScrollAnimation = function() {
@@ -205,7 +227,7 @@ SX.mainScrollAnimation = function() {
     const fakeItem = 'fakeItem';
     const content = 'content';
     let durationTime = 1200;
-    let titleAway = 1900;
+    let titleAway = $(window).width();
 
     if (atMobile.matches) {
         titleAway = 767;
@@ -273,73 +295,76 @@ SX.cursorAddClassToActiveElems = function() {
     const allTextareas = $('textarea');
     const otherElems = $('.js-cursor-hover');
 
-    allLinks.each(function() {
-        $(this).addClass('hover mouseDown')
-    });
+    if(fromDesktop.matches){
+        allLinks.each(function() {
+            $(this).addClass('hover mouseDown')
+        });
 
-    allBtns.each(function() {
-        $(this).addClass('hover mouseDown')
-    });
+        allBtns.each(function() {
+            $(this).addClass('hover mouseDown')
+        });
 
-    allInputs.each(function() {
-        $(this).addClass('hover mouseDown')
-    });
+        allInputs.each(function() {
+            $(this).addClass('hover mouseDown')
+        });
 
-    allTextareas.each(function() {
-        $(this).addClass('hover mouseDown')
-    });
+        allTextareas.each(function() {
+            $(this).addClass('hover mouseDown')
+        });
 
-    allTextareas.each(function() {
-        $(this).addClass('hover mouseDown')
-    });
+        allTextareas.each(function() {
+            $(this).addClass('hover mouseDown')
+        });
 
-    allLabels.each(function() {
-        $(this).addClass('hover mouseDown')
-    });
+        allLabels.each(function() {
+            $(this).addClass('hover mouseDown')
+        });
 
-    allCheckbox.each(function() {
-        $(this).addClass('hover mouseDown')
-    });
+        allCheckbox.each(function() {
+            $(this).addClass('hover mouseDown')
+        });
 
-    otherElems.each(function() {
-        $(this).addClass('hover mouseDown')
-    });
+        otherElems.each(function() {
+            $(this).addClass('hover mouseDown')
+        });
+    }
 };
 
 SX.customCursor = function() {
     const $cursor = $('.cursor');
     const $xray = $('.xray');
     const mouseDown = document.querySelector('body');
+    if(fromDesktop.matches){
+        $(window).on('mousemove', function(event) {
+            const cursorHalfWidth = 24;
+            const cursorPosLeft = event.clientX;
+            const cursorPosTop = event.clientY;
+            const target = event.target;
 
-    $(window).on('mousemove', function(event) {
-        const cursorHalfWidth = 24;
-        const cursorPosLeft = event.clientX;
-        const cursorPosTop = event.clientY;
-        const target = event.target;
+            $cursor.css({'left': cursorPosLeft, 'top': cursorPosTop,
+            'transform': 'translate('+ '-' + cursorHalfWidth + 'px, ' + '-' + cursorHalfWidth + 'px)' });
+        });
 
-        $cursor.css({'left': cursorPosLeft, 'top': cursorPosTop,
-        'transform': 'translate('+ '-' + cursorHalfWidth + 'px, ' + '-' + cursorHalfWidth + 'px)' });
-    });
+        $('.hover').on('mouseenter', function() {
+            $cursor.addClass('cursor--hover');
+        });
 
-    $('.hover').on('mouseenter', function() {
-        $cursor.addClass('cursor--hover');
-    });
+        $('.hover').on('mouseleave', function() {
+            $cursor.removeClass('cursor--hover');
+        });
 
-    $('.hover').on('mouseleave', function() {
-        $cursor.removeClass('cursor--hover');
-    });
+        $('.mouseDown').mousedown(function() {
+            $cursor.addClass('cursor--mousedown');
+        });
 
-    $('.mouseDown').mousedown(function() {
-        $cursor.addClass('cursor--mousedown');
-    });
+        $('.mouseDown').mouseup(function() {
+            $cursor.removeClass('cursor--mousedown');
+        });
 
-    $('.mouseDown').mouseup(function() {
-        $cursor.removeClass('cursor--mousedown');
-    });
-
-    $('.mouseDown').mouseleave(function() {
-        $cursor.removeClass('cursor--mousedown');
-    });
+        $('.mouseDown').mouseleave(function() {
+            $cursor.removeClass('cursor--mousedown');
+        });
+    }
 };
 
 SX.parallaxInit = function() {
@@ -557,7 +582,8 @@ SX.historySlider = function() {
             arrows: false,
             infinite: false,
             slidesToShow: 1,
-            draggable: false
+            draggable: false,
+            cssEase: false
         }
     };
 
@@ -599,6 +625,8 @@ SX.historySlider = function() {
 
                     $(historyTypeSlider).slick('slickUnfilter');
                     $(historyTypeSlider).slick('slickFilter', slideFilter);
+                }else{
+                    $(this).addClass('activeHistory');
                 }
             });
         });
@@ -652,16 +680,32 @@ SX.historySlider = function() {
             $('.history').on('mousewheel DOMMouseScroll', function(e) {
 
                 if (typeof e.originalEvent.detail == 'number') {
-                    console.log(e.originalEvent.detail);
-
                     $('.history').find('.history__slide.active .history__type-slider').slick('slickNext');
                 }
             });
 
-            $(historyTypeSlider).on('afterChange', function(event, slick, currentSlide, nextSlide) {
+            $(historyTypeSlider)
+            .on('afterChange', function(event, slick, currentSlide, nextSlide) {
                 const currentColor = $(this).find('.slick-current').data('tabitem');
+
                 $btns.addClass(currentColor);
-            });
+            })
+            .on('beforeChange', function(event, slick, currentSlide, nextSlide){
+                slick.$slides.each(function(){
+                    $(this).find('.history__type-slider-item-wrap').removeClass('animated-1s fadeInUpBig');
+
+                    if($(this).hasClass('slick-current')){
+                        let $currentSlideNext = $(this).next();
+                        let $currentSlidePrev = $(this).prev();
+
+                        setTimeout(function(){
+                            $currentSlidePrev.find('.history__type-slider-item-wrap').addClass('animated-1s fadeInUpBig');
+                            $currentSlideNext.find('.history__type-slider-item-wrap').addClass('animated-1s fadeInUpBig');
+                        }, 100);
+                    }
+                });
+            })
+            ;
         }
     };
 
@@ -888,8 +932,8 @@ SX.socialMenu = function() {
                     opacity: '1',
                     display: 'flex',
                     ease: animationDuration
-                });
-            historyMenu.stop();
+                })
+                .stop();
 
             const menu = new TimelineMax()
                 .staggerFromTo($btns, 0.5, {
@@ -935,8 +979,8 @@ SX.socialMenu = function() {
                     y: '0',
                     opacity: '1',
                     ease: animationDuration
-                }, 0.1);
-            menu.stop();
+                }, 0.1)
+                .stop();
 
 
             $btnMenu.on('click', function() {
@@ -973,33 +1017,6 @@ SX.socialMenu = function() {
         }
 
         if (atMobile.matches) {
-            const historyMenuMobile = new TimelineMax()
-                .fromTo('.history__menu', 0.0001, {
-                    visibility: 'hidden'
-                }, {
-                    visibility: 'visible'
-                })
-                .staggerFromTo($historyBtn, 0.5, {
-                    y: '-30',
-                    opacity: '0'
-                }, {
-                    y: '0',
-                    opacity: '1',
-                    ease: animationDuration
-                }, 0.1);
-            historyMenuMobile.stop();
-
-            const scene = new ScrollMagic.Scene({
-                    triggerElement: '#history',
-                })
-                .on('enter', function() {
-                    historyMenuMobile.play();
-                })
-                .on('leave', function() {
-                    historyMenuMobile.reverse();
-                })
-                .addTo(controller);
-
             $('.social__close').on('click', function() {
                 if ($btnMenu.hasClass('activeOpen')) {
                     $btnMenu.removeClass('activeOpen');
@@ -1095,16 +1112,28 @@ SX.projector = function() {
 
 SX.scrollToMainStatic = function() {
     const controllerStatic = new ScrollMagic.Controller();
-    if (fromDesktop.matches) {
+    const $headerTop = $('.page-header--top');
+    const $headerBot = $('.page-header--bot');
+
+    if (fromVerticalTablet.matches) {
+        const halfHistoryHeight = ($('.history').innerHeight() / 100) * 47;
+        console.log(halfHistoryHeight);
+
         const scrollToHistory = function() {
-            return new TimelineMax()
+            $headerTop.removeClass('show').addClass('hide');
+            $headerBot.removeClass('hide').addClass('show');
+
+             new TimelineMax()
                 .to(window, 1.5, {
                     scrollTo: '.history'
                 });
         };
 
         const scrollToLegacy = function() {
-            return new TimelineMax()
+            $headerBot.removeClass('show').addClass('hide');
+            $headerTop.removeClass('hide').addClass('show');
+
+             new TimelineMax()
                 .to(window, 1.5, {
                     scrollTo: '.legacy'
                 });
@@ -1121,7 +1150,7 @@ SX.scrollToMainStatic = function() {
 
             const sceneOut = new ScrollMagic.Scene({
                     triggerElement: '.history',
-                    offset: 10,
+                    offset: halfHistoryHeight,
                 })
                 .on('leave', function() {
                     scrollToLegacy();
@@ -1243,7 +1272,6 @@ SX.phoneMask = function(){
 $(function onPageReady() {
     SX.legacyOnLoadAnimation();
     SX.legacyStaticHover();
-    SX.legacyOnScrollAnimation();
     SX.mainScrollAnimation();
     SX.scrollToMainContent();
     SX.parallaxInit();

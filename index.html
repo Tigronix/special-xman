@@ -38,9 +38,15 @@
 					<svg class="icon icon-instagram"><use xlink:href="#icon-instagram"></use></svg>
 				</a>
 
-				<button type="button" class="social__link-all "><img src="img/share.png" alt=""></button>
 
-				<section class="menu menu--hide">
+				<button type="button" class="social__link-all social__link-all--social">
+					<img class="social__open " src="img/share.png" alt="">
+				</button>
+				<div class="social__close hover mouseDown">
+					<svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg>
+				</div>
+
+				<section class="menu menu--header">
 					<a href="history.html" class="menu__link">история</a>
 					<a href="people.html" class="menu__link">люди х</a>
 					<a href="gallery.html" class="menu__link">галерея</a>
@@ -63,19 +69,19 @@
 						</h1>
 					</div>
 
-                    <section class="menu">
+                    <section class="menu menu--legacy">
         				<a href="history.html" class="menu__link menu__link--animated">история</a>
         				<a href="people.html" class="menu__link menu__link--animated">люди х</a>
         				<a href="gallery.html" class="menu__link menu__link--animated">галерея</a>
         			</section>
 				</div>
 				<svg class="legacy__x icon icon-x"><use xlink:href="#icon-x"></use></svg>
-				<div type="button" class="scroll-me">
+				<button type="button" class="scroll-me scroll-me--main">
 					<div class="scroll-me__text">
 						скролл
 					</div>
 					<img class="scroll-me__icon" src="img/arr-down.svg" alt="">
-				</div>
+				</button>
 			</section>
 			<section class="scroll-section">
 				<div class="js-parallax scroll-section__parallax-item scroll-section__parallax-item--0">
@@ -129,7 +135,12 @@
 						<div class="scroll-section__content">
 							<p class="scroll-section__desc">Мы называем их «Люди X». Это те, кто развивается вместе с агентством и выводит его на новый уровень. Совсем скоро мы расскажем здесь о каждом сотруднике Uplab. А пока познакомим вас с десяткой героев, которая показывает отличные результаты и из
 								года в год не перестает удивлять. </p>
-							<a href="#" class="link-more">смотреть <span class="link-more__icon"></span></a>
+								<a href="#" class="link-more">смотреть
+								<span class="link-more__icon">
+									<svg class="icon">
+										<use xlink:href="#icon-arrow-right"></use>
+								</span>
+								</svg></a>
 						</div>
 					</div>
 					<div class="scroll-section__item">
@@ -137,7 +148,12 @@
 							<a class="scroll-section__title-link" href="#">галерея</a>
 						</div>
 						<div class="scroll-section__content">
-							<a href="#" class="link-more">смотреть <span class="link-more__icon"></span></a>
+							<a href="#" class="link-more">смотреть
+							<span class="link-more__icon">
+								<svg class="icon">
+									<use xlink:href="#icon-arrow-right"></use>
+							</span>
+							</svg></a>
 						</div>
 					</div>
 				</div>
