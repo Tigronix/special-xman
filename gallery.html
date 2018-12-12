@@ -18,23 +18,22 @@
 		<main-parallax-svg></main-parallax-svg>
 	</div>
 	<section class="global-wrapper global-wrapper--static global-wrapper--gallery">
-		<div class="cursor"></div>
 		<header class="page-header">
 			<a href="index.html" class="logo">
 				<svg class="icon icon-logo"><use xlink:href="#icon-logo"></use></svg>
 				<span class="logo__desc">digital agency</span>
 			</a>
 			<div class="social">
-				<a href="#" class="social__link">
+				<a href="https://vk.com/public_uplab" class="social__link">
 					<svg class="icon icon-vk"><use xlink:href="#icon-vk"></use></svg>
 				</a>
-				<a href="#" class="social__link">
+				<a href="https://www.facebook.com/UpLab" class="social__link">
 					<svg class="icon icon-facebook"><use xlink:href="#icon-facebook"></use></svg>
 				</a>
-				<a href="#" class="social__link">
+				<a href="https://twitter.com/uplab" class="social__link">
 					<svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
 				</a>
-				<a href="#" class="social__link">
+				<a href="https://www.instagram.com/uplab/" class="social__link">
 					<svg class="icon icon-instagram"><use xlink:href="#icon-instagram"></use></svg>
 				</a>
 
@@ -55,22 +54,16 @@
 				<div class="gallery__slider-wrap">
 					<div class="gallery__slider">
 						<div class="gallery__slide">
-							<a data-bg-mobile="img/gallery_big.jpg" data-bg-vertical-tablet="img/gallery_big.jpg" data-bg-horizontal-tablet="img/gallery_big.jpg" data-bg-desktop="img/gallery_big.jpg" data-lightbox="gallery" href="" class="gallery__img js-adaptive-bg"><img class="js-cursor-hover" src="img/gallery_1.jpg" alt=""></a>
+							<a data-fancybox="gallery" href="img/gallery_big.jpg" class="gallery__img"><img class="js-cursor-hover" src="img/gallery_1.jpg" alt=""></a>
 						</div>
 						<div class="gallery__slide">
-							<a data-lightbox="gallery" href="img/gallery_big.jpg" class="gallery__img"><img class="js-cursor-hover" src="img/gallery_2.jpg" alt=""></a>
+							<a data-fancybox="gallery" href="img/gallery_big.jpg" class="gallery__img"><img class="js-cursor-hover" src="img/gallery_2.jpg" alt=""></a>
 						</div>
 						<div class="gallery__slide">
-							<a data-lightbox="gallery" href="img/gallery_big.jpg" class="gallery__img"><img class="js-cursor-hover" src="img/gallery_3.jpg" alt=""></a>
+							<a data-fancybox="gallery" href="img/gallery_big.jpg" class="gallery__img"><img class="js-cursor-hover" src="img/gallery_3.jpg" alt=""></a>
 						</div>
 						<div class="gallery__slide">
-							<a data-lightbox="gallery" href="img/gallery_big.jpg" class="gallery__img"><img class="js-cursor-hover" src="img/gallery_1.jpg" alt=""></a>
-						</div>
-						<div class="gallery__slide">
-							<a data-lightbox="gallery" href="img/gallery_big.jpg" class="gallery__img"><img class="js-cursor-hover" src="img/gallery_2.jpg" alt=""></a>
-						</div>
-						<div class="gallery__slide">
-							<a data-lightbox="gallery" href="img/gallery_big.jpg" class="gallery__img"><img class="js-cursor-hover" src="img/gallery_3.jpg" alt=""></a>
+							<a data-fancybox="gallery" href="img/gallery_big.jpg" class="gallery__img"><img class="js-cursor-hover" src="img/gallery_1.jpg" alt=""></a>
 						</div>
 					</div>
 					<div class="gallery__nav">
@@ -82,8 +75,47 @@
 					</div>
 				</div>
             </section>
+        	<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        		<div class="pswp__bg"></div>
+        		<div class="pswp__scroll-wrap">
+        			<div class="pswp__container">
+        				<div class="pswp__item"></div>
+        				<div class="pswp__item"></div>
+        				<div class="pswp__item"></div>
+        			</div>
+        			<div class="pswp__ui pswp__ui--hidden">
+        				<div class="pswp__top-bar">
+        					<div class="pswp__counter"></div>
+        					<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        					<button class="pswp__button pswp__button--share" title="Share"></button>
+        					<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        					<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        					<div class="pswp__preloader">
+        						<div class="pswp__preloader__icn">
+        							<div class="pswp__preloader__cut">
+        								<div class="pswp__preloader__donut"></div>
+        							</div>
+        						</div>
+        					</div>
+        				</div>
+        				<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        					<div class="pswp__share-tooltip"></div>
+        				</div>
+        				<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+
+        	            </button>
+        				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+
+        	            </button>
+        				<div class="pswp__caption">
+        					<div class="pswp__caption__center"></div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
 		</main>
 	</section>
+		<div class="cursor"></div>
 	<script src="js/libs.min.js"></script>
 	<script src="js/common.js"></script>
 </body>
