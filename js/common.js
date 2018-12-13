@@ -24,13 +24,56 @@ SX.legacyOnLoadAnimation = function() {
 
     } else {
         tlOnLoadScrollAnimation
-        .fromTo('.logo', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration})
-        .staggerFromTo('.social__link', 1, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.1)
-        .fromTo('.legacy__x', 0.5, {x:'-50%', y:'-52%', opacity:'0'}, {y:'-50%', x:'-50%', opacity:'1', ease: animationDuration}, '-=0.1')
-        .fromTo('.legacy__nav', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-        .staggerFromTo('.menu__link--animated', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, 0.3)
-        .fromTo('.scroll-me', 0.5, {y:'-30', opacity:'0'}, {y:'0', opacity:'1', ease: animationDuration}, '-=0.1')
-        ;
+            .fromTo('.logo', 0.5, {
+                y: '-30',
+                opacity: '0'
+            }, {
+                y: '0',
+                opacity: '1',
+                ease: animationDuration
+            })
+            .staggerFromTo('.social__link', 1, {
+                y: '-30',
+                opacity: '0'
+            }, {
+                y: '0',
+                opacity: '1',
+                ease: animationDuration
+            }, 0.1)
+            .fromTo('.legacy__x', 0.5, {
+                x: '-50%',
+                y: '-52%',
+                opacity: '0'
+            }, {
+                y: '-50%',
+                x: '-50%',
+                opacity: '1',
+                ease: animationDuration
+            }, '-=0.1')
+            .fromTo('.legacy__nav', 0.5, {
+                y: '-30',
+                opacity: '0'
+            }, {
+                y: '0',
+                opacity: '1',
+                ease: animationDuration
+            }, '-=0.1')
+            .staggerFromTo('.menu__link--animated', 0.5, {
+                y: '-30',
+                opacity: '0'
+            }, {
+                y: '0',
+                opacity: '1',
+                ease: animationDuration
+            }, 0.3)
+            .fromTo('.scroll-me', 0.5, {
+                y: '-30',
+                opacity: '0'
+            }, {
+                y: '0',
+                opacity: '1',
+                ease: animationDuration
+            }, '-=0.1');
     }
 
 };
@@ -91,8 +134,7 @@ SX.scrollToMainContent = function() {
             .to('.legacy__h1', 2, {
                 x: h1Position,
                 ease: animationDuration
-            }, '-=2.6')
-            ;
+            }, '-=2.6');
     };
     const tweenOut = function() {
         return tlOnLeaveScrollAnimation
@@ -119,18 +161,16 @@ SX.scrollToMainContent = function() {
             .to('.legacy__h1', 0.1, {
                 x: '0'
             }, '-=2')
-            .staggerFromTo('.legacy__h1 .letter', 0.70,
-            {
+            .staggerFromTo('.legacy__h1 .letter', 0.70, {
                 y: '100',
                 opacity: '0'
-            },
-            {
+            }, {
                 y: '0',
                 opacity: '1',
-                ease: Back. easeOut.config(3)
+                ease: Back.easeOut.config(3)
             }, 0.05)
             .to('.menu--legacy', 0.1, {
-                display:'flex'
+                display: 'flex'
             }, '-=2')
             .staggerFromTo('.menu--legacy .menu__link', 0.3, {
                 y: '-30',
@@ -169,148 +209,148 @@ SX.scrollToMainContent = function() {
         humanError = +450;
     }
 
-    if (fakeBlock && !isIe11 && !isEdge) {
-        const fakeBlockOffset = $('#fakeBlock').offset().top;
-        const firstFakeItemHeight = $('.scroll-section__fake-item:first-child').offset().top;
+    if (!isIe11 && !isEdge) {
+        if (fakeBlock) {
+            const fakeBlockOffset = $('#fakeBlock').offset().top;
+            const firstFakeItemHeight = $('.scroll-section__fake-item:first-child').offset().top;
 
-        let scrollToFirstTitleNumber = fakeBlockOffset + firstFakeItemHeight + humanError;
+            let scrollToFirstTitleNumber = fakeBlockOffset + firstFakeItemHeight + humanError;
 
-        const scrollToFirstTitle = function() {
-            if(atMobile.matches){
-                scrollToFirstTitleNumber = $('.scroll-section__wrap').offset().top;
-            }
+            const scrollToFirstTitle = function() {
+                if (atMobile.matches) {
+                    scrollToFirstTitleNumber = $('.scroll-section__wrap').offset().top;
+                }
 
-            $([document.documentElement, document.body]).animate({
-                scrollTop: scrollToFirstTitleNumber
-            }, 1500);
-        };
-
-        const scrollToTop = function() {
-            $([document.documentElement, document.body]).animate({
-                scrollTop: 1
-            }, 1500);
-        };
-
-        $scrollBtnMain.on('click', function(){
-            scrollToFirstTitle();
-        });
-
-        if (fromDesktop.matches) {
-            const sceneIn = new ScrollMagic.Scene({})
-                .on('enter', function() {
-                    tweenIn();
-                    scrollToFirstTitle();
-                })
-                .offset(60)
-                .addTo(controller);
-
-            const sceneOut = new ScrollMagic.Scene({
-                    triggerElement: '#fakeBlock'
-                })
-                .on('leave', function() {
-                    scrollToTop();
-                    tweenOut();
-                })
-                .offset(390)
-                .addTo(controller);
-        }
-        else{
-            const tweenMobile =
-                 new TimelineMax()
-                    .stop()
-                    .fromTo('.menu--legacy', 0.4,
-                        {
-                            position: 'absolute',
-                            transform: '',
-                            left: '54%',
-                            top: '40px',
-                            transform: 'translate(-50%, 0)'
-                        },
-                        {
-                            position: 'fixed',
-                            top: '30px',
-                            left: '54%',
-                            transform: 'translate(-50%, 0)'
-                        },
-                    )
-                ;
-            const tweenOut = function() {
-                return tlOnLeaveScrollAnimation
-                    .to('.scroll-section', 0.1, {
-                        zIndex: '0'
-                    })
-                    .to('.menu--header', 0.1, {
-                        display: 'none'
-                    }, '-=2')
-                    .to('.legacy__x', 2, {
-                        x: '-50%',
-                        y: '-50%',
-                        scale: '1',
-                        ease: animationDuration
-                    })
-                    .to('.legacy__x', 2, {
-                        fill: xColorLeave,
-                        ease: animationDuration
-                    }, '-=2.5')
-                    .to('.global-wrapper--main', 2, {
-                        backgroundColor: '#ff5722',
-                        ease: animationDuration
-                    }, '-=2')
-                    .to('.legacy__h1', 0.1, {
-                        x: '0'
-                    }, '-=2')
-                    .staggerFromTo('.legacy__h1 .letter', 0.70,
-                    {
-                        y: '100',
-                        opacity: '0'
-                    },
-                    {
-                        y: '0',
-                        opacity: '1',
-                        ease: Back. easeOut.config(3)
-                    }, 0.05)
-                    .to('.menu--legacy', 0.1, {
-                        display:'flex'
-                    }, '-=2')
-                    .staggerFromTo('.menu--legacy .menu__link', 0.3, {
-                        y: '-30',
-                        opacity: '0'
-                    }, {
-                        y: '0',
-                        opacity: '1',
-                        ease: animationDuration
-                    }, '0.15')
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: scrollToFirstTitleNumber
+                }, 1500);
             };
 
-            let firstScreenTrigger = 60;
-            let secondScreenTrigger = 380;
+            const scrollToTop = function() {
+                $([document.documentElement, document.body]).animate({
+                    scrollTop: 1
+                }, 1500);
+            };
 
-            if(atVerticalTablet.matches){
-                firstScreenTrigger = 200;
-                secondScreenTrigger = 500;
+            $scrollBtnMain.on('click', function() {
+                scrollToFirstTitle();
+            });
+
+            if (fromDesktop.matches && !isIe11 && !isEdge) {
+                const sceneIn = new ScrollMagic.Scene({})
+                    .on('enter', function() {
+                        tweenIn();
+                        scrollToFirstTitle();
+                    })
+                    .offset(60)
+                    .addTo(controller);
+
+                const sceneOut = new ScrollMagic.Scene({
+                        triggerElement: '#fakeBlock'
+                    })
+                    .on('leave', function() {
+                        scrollToTop();
+                        tweenOut();
+                    })
+                    .offset(390)
+                    .addTo(controller);
+            } else {
+                if(atHorizontalTablet.matches){
+                    let menuLegacyTopPosition = 'calc(100% - 40px)';
+                }else if(atVerticalTablet.matches || atMobile.matches){
+                    menuLegacyTopPosition = '100%';
+                }
+                const tweenMobile =
+                    new TimelineMax()
+                    .stop()
+                    .fromTo('.menu--legacy', 0.4, {
+                        position: 'absolute',
+                        transform: '',
+                        left: '50%',
+                        top: menuLegacyTopPosition,
+                        transform: 'translate(-50%, 0)'
+                    }, {
+                        position: 'fixed',
+                        top: '56px',
+                        left: '50%',
+                        transform: 'translate(-50%, 0)'
+                    });
+                const tweenOut = function() {
+                    return tlOnLeaveScrollAnimation
+                        .to('.scroll-section', 0.1, {
+                            zIndex: '0'
+                        })
+                        .to('.menu--header', 0.1, {
+                            display: 'none'
+                        }, '-=2')
+                        .to('.legacy__x', 2, {
+                            x: '-50%',
+                            y: '-50%',
+                            scale: '1',
+                            ease: animationDuration
+                        })
+                        .to('.legacy__x', 2, {
+                            fill: xColorLeave,
+                            ease: animationDuration
+                        }, '-=2.5')
+                        .to('.global-wrapper--main', 2, {
+                            backgroundColor: '#ff5722',
+                            ease: animationDuration
+                        }, '-=2')
+                        .to('.legacy__h1', 0.1, {
+                            x: '0'
+                        }, '-=2')
+                        .staggerFromTo('.legacy__h1 .letter', 0.70, {
+                            y: '100',
+                            opacity: '0'
+                        }, {
+                            y: '0',
+                            opacity: '1',
+                            ease: Back.easeOut.config(3)
+                        }, 0.05)
+                        .to('.menu--legacy', 0.1, {
+                            display: 'flex'
+                        }, '-=2')
+                        .staggerFromTo('.menu--legacy .menu__link', 0.3, {
+                            y: '-30',
+                            opacity: '0'
+                        }, {
+                            y: '0',
+                            opacity: '1',
+                            ease: animationDuration
+                        }, '0.15')
+                };
+
+                let firstScreenTrigger = 60;
+                let secondScreenTrigger = 380;
+
+                if (atVerticalTablet.matches) {
+                    firstScreenTrigger = 200;
+                    secondScreenTrigger = 500;
+                }
+
+                if (atMobile.matches) {
+                    firstScreenTrigger = 30;
+                    secondScreenTrigger = 0;
+                }
+
+                const sceneOut = new ScrollMagic.Scene({
+                        triggerElement: '.scroll-section__wrap'
+                    })
+                    .setClassToggle(".menu--legacy", "hide")
+                    .on('enter', function() {
+                        tweenMobile.play();
+                    })
+                    .on('leave', function() {
+                        tweenMobile.reverse();
+                    })
+                    .offset(secondScreenTrigger)
+                    .addTo(controller);
             }
-
-            if(atMobile.matches){
-                firstScreenTrigger = 30;
-                secondScreenTrigger = 0;
-            }
-
-            const sceneOut = new ScrollMagic.Scene({
-                    triggerElement: '.scroll-section__wrap'
-                })
-                .on('enter', function(){
-                    tweenMobile.play();
-                })
-                .on('leave', function() {
-                    tweenMobile.reverse();
-                })
-                .offset(secondScreenTrigger)
-                .addIndicators()
-                .addTo(controller);
         }
     }
 
-    $scrollBtnStatic.on('click', function(){
+    $scrollBtnStatic.on('click', function() {
         const nextBlockOffsetTop = $(this).closest('.legacy').next().offset().top;
 
         $([document.documentElement, document.body]).animate({
@@ -395,7 +435,7 @@ SX.cursorAddClassToActiveElems = function() {
     const allTextareas = $('textarea');
     const otherElems = $('.js-cursor-hover');
 
-    if(fromDesktop.matches){
+    if (fromDesktop.matches) {
         allLinks.each(function() {
             $(this).addClass('hover mouseDown')
         });
@@ -434,15 +474,18 @@ SX.customCursor = function() {
     const $cursor = $('.cursor');
     const $xray = $('.xray');
     const mouseDown = document.querySelector('body');
-    if(fromDesktop.matches){
+    if (fromDesktop.matches) {
         $(window).on('mousemove', function(event) {
             const cursorHalfWidth = 24;
             const cursorPosLeft = event.clientX;
             const cursorPosTop = event.clientY;
             const target = event.target;
 
-            $cursor.css({'left': cursorPosLeft, 'top': cursorPosTop,
-            'transform': 'translate('+ '-' + cursorHalfWidth + 'px, ' + '-' + cursorHalfWidth + 'px)' });
+            $cursor.css({
+                'left': cursorPosLeft,
+                'top': cursorPosTop,
+                'transform': 'translate(' + '-' + cursorHalfWidth + 'px, ' + '-' + cursorHalfWidth + 'px)'
+            });
         });
 
         $('.hover').on('mouseenter', function() {
@@ -691,7 +734,7 @@ SX.historySlider = function() {
     };
 
     const historyTypeSliderInit = function() {
-        return $(historyTypeSlider).each(function(i){
+        return $(historyTypeSlider).each(function(i) {
             $(this).addClass('history-type-slider-' + i);
             $('.history-type-slider-' + i).slick(historyTypeSliderSettings(i));
         });
@@ -731,7 +774,7 @@ SX.historySlider = function() {
 
                     $(historyTypeSlider).slick('slickUnfilter');
                     $(historyTypeSlider).slick('slickFilter', slideFilter);
-                }else{
+                } else {
                     $(this).addClass('activeHistory');
                 }
             });
@@ -754,11 +797,11 @@ SX.historySlider = function() {
         const $arrPrev = $('.history__type-slider-arrow--prev');
         const $arrNext = $('.history__type-slider-arrow--next');
 
-        $arrPrev.on('click', function(){
+        $arrPrev.on('click', function() {
             $(this).closest('.history').find('.history__slide.active .history__type-slider').slick('slickPrev');
         });
 
-        $arrNext.on('click', function(){
+        $arrNext.on('click', function() {
             $(this).closest('.history').find('.history__slide.active .history__type-slider').slick('slickNext');
         });
 
@@ -802,27 +845,26 @@ SX.historySlider = function() {
         }
 
         $(historyTypeSlider)
-        .on('afterChange', function(event, slick, currentSlide, nextSlide) {
-            const currentColor = $(this).find('.slick-current').data('tabitem');
+            .on('afterChange', function(event, slick, currentSlide, nextSlide) {
+                const currentColor = $(this).find('.slick-current').data('tabitem');
 
-            $btns.addClass(currentColor);
-        })
-        .on('beforeChange', function(event, slick, currentSlide, nextSlide){
-            slick.$slides.each(function(){
-                $(this).find('.history__type-slider-item-wrap').removeClass('animated-1s fadeInUpBig');
+                $btns.addClass(currentColor);
+            })
+            .on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+                slick.$slides.each(function() {
+                    $(this).find('.history__type-slider-item-wrap').removeClass('animated-1s fadeInUpBig');
 
-                if($(this).hasClass('slick-current')){
-                    let $currentSlideNext = $(this).next();
-                    let $currentSlidePrev = $(this).prev();
+                    if ($(this).hasClass('slick-current')) {
+                        let $currentSlideNext = $(this).next();
+                        let $currentSlidePrev = $(this).prev();
 
-                    setTimeout(function(){
-                        $currentSlidePrev.find('.history__type-slider-item-wrap').addClass('animated-1s fadeInUpBig');
-                        $currentSlideNext.find('.history__type-slider-item-wrap').addClass('animated-1s fadeInUpBig');
-                    }, 100);
-                }
+                        setTimeout(function() {
+                            $currentSlidePrev.find('.history__type-slider-item-wrap').addClass('animated-1s fadeInUpBig');
+                            $currentSlideNext.find('.history__type-slider-item-wrap').addClass('animated-1s fadeInUpBig');
+                        }, 100);
+                    }
+                });
             });
-        })
-        ;
     };
 
     slickDotsNumbers();
@@ -893,25 +935,24 @@ SX.filterMenu = function() {
 
         const tweenIn =
             new TimelineMax()
-                .stop()
-                .staggerFromTo(menuLinks, 0.5, {
-                    y: '0',
-                    opacity: '1'
-                }, {
-                    y: '-80',
-                    opacity: '0',
-                    ease: animationDuration
-                }, 0.1)
-                .staggerFromTo(filterMenuLinks, 0.5, {
-                    y: '-80',
-                    opacity: '0'
-                }, {
-                    y: '0',
-                    opacity: '1',
-                    ease: animationDuration
-                }, 0.1);
-        ;
-        if(fromHorizontalTablet.matches){
+            .stop()
+            .staggerFromTo(menuLinks, 0.5, {
+                y: '0',
+                opacity: '1'
+            }, {
+                y: '-80',
+                opacity: '0',
+                ease: animationDuration
+            }, 0.1)
+            .staggerFromTo(filterMenuLinks, 0.5, {
+                y: '-80',
+                opacity: '0'
+            }, {
+                y: '0',
+                opacity: '1',
+                ease: animationDuration
+            }, 0.1);;
+        if (fromHorizontalTablet.matches) {
             const scene = new ScrollMagic.Scene({
                     triggerElement: '#history',
                 })
@@ -963,166 +1004,40 @@ SX.historyCircle = function() {
 };
 
 SX.socialMenu = function() {
-    $(window).on('load resize', function() {
-        const $btns = $('.social__link-all');
-        const $btnFilter = $('.social__link-all--filter');
-        const $btnMenu = $('.social__link-all--social');
-        const $btnClose = ('.social__close');
-        const $historyMenu = $('.history__menu');
-        const $historyBtn = $('.history__btn');
-        const $social = $('.social');
+    const $btnFilter = $('.social__link-all--filter');
+    const $btnSocial = $('.social__link-all--social');
+    const $btnClose = $('.social__close');
+    const $globalWrapper = $('.global-wrapper');
 
-        if (atVerticalTablet.matches | atMobile.matches) {
-            const historyMenu = new TimelineMax()
-                .staggerFromTo($btns, 0.5, {
-                    y: '0',
-                    opacity: '1'
-                }, {
-                    y: '-30',
-                    opacity: '0',
-                    display: 'none',
-                    ease: animationDuration
-                }, 0.1)
-                .fromTo('.menu', 0.5, {
-                    y: '0',
-                    opacity: '1'
-                }, {
-                    y: '-30',
-                    opacity: '0',
-                    display: 'none',
-                    ease: animationDuration
-                }, -0.5)
-                .fromTo('.logo', 0.5, {
-                    y: '0',
-                    opacity: '1'
-                }, {
-                    y: '-30',
-                    opacity: '0',
-                    ease: animationDuration
-                })
-                .fromTo('.history__menu', 0.001, {
-                    display: 'none'
-                }, {
-                    display: 'flex'
-                })
-                .staggerFromTo($historyBtn, 0.5, {
-                    y: '-30',
-                    opacity: '0'
-                }, {
-                    y: '0',
-                    opacity: '1',
-                    visibility: 'visible',
-                    ease: animationDuration
-                }, 0.1)
-                .fromTo('.social__close', 0.5, {
-                    y: '-30',
-                    opacity: '0'
-                }, {
-                    y: '0',
-                    opacity: '1',
-                    display: 'flex',
-                    ease: animationDuration
-                })
-                .stop();
-
-            const menu = new TimelineMax()
-                .staggerFromTo($btns, 0.5, {
-                    y: '0',
-                    opacity: '1'
-                }, {
-                    y: '-30',
-                    opacity: '0',
-                    display: 'none',
-                    ease: animationDuration
-                }, 0.1)
-                .fromTo('.menu', 0.5, {
-                    y: '0',
-                    opacity: '1'
-                }, {
-                    y: '-30',
-                    opacity: '0',
-                    display: 'none',
-                    ease: animationDuration
-                }, -0.5)
-                .fromTo('.logo', 0.5, {
-                    y: '0',
-                    opacity: '1'
-                }, {
-                    y: '-30',
-                    opacity: '0',
-                    ease: animationDuration
-                })
-                .fromTo('.social__close', 0.5, {
-                    y: '-30',
-                    opacity: '0'
-                }, {
-                    y: '0',
-                    opacity: '1',
-                    display: 'flex',
-                    ease: animationDuration
-                })
-                .staggerFromTo('.social__link', 0.5, {
-                    y: '-30',
-                    opacity: '0'
-                }, {
-                    visibility: 'visible',
-                    y: '0',
-                    opacity: '1',
-                    ease: animationDuration
-                }, 0.1)
-                .stop();
-
-
-            $btnMenu.on('click', function() {
-                $(this).addClass('activeOpen');
-                $social.addClass('active');
-
-                const checked = $(this).hasClass('activeOpen');
-
-                if (checked) {
-                    menu.play();
-                }
-            });
-
-            $btnFilter.on('click', function() {
-                $(this).addClass('activeOpen');
-                const checked = $(this).hasClass('activeOpen');
-                if (checked) {
-                    historyMenu.play();
-                }
-            });
-
-            $('.social__close').on('click', function() {
-                if ($btnMenu.hasClass('activeOpen')) {
-                    $btnMenu.removeClass('activeOpen');
-                    $social.removeClass('active');
-                    menu.reverse();
-                }
-
-                if ($btnFilter.hasClass('activeOpen')) {
-                    $btnFilter.removeClass('activeOpen');
-                    historyMenu.reverse();
-                }
-            });
-        }
-
-        if (atMobile.matches) {
-            $('.social__close').on('click', function() {
-                if ($btnMenu.hasClass('activeOpen')) {
-                    $btnMenu.removeClass('activeOpen');
-                    $social.removeClass('active');
-                    menu.reverse();
-                }
-
-                if ($btnFilter.hasClass('activeOpen')) {
-                    $btnFilter.removeClass('activeOpen');
-                    historyMenu.reverse();
-                }
-            });
-        }
-
-
+    $btnSocial.on('click', function(){
+        $globalWrapper.addClass('openSocialMenu');
     });
+
+    $btnFilter.on('click', function(){
+        $globalWrapper.addClass('openFilterMenu');
+    });
+
+    $btnClose.on('click', function(){
+        $globalWrapper.removeClass('openSocialMenu openFilterMenu');
+    });
+
+    if(atMobile.matches){
+        const sceneSocialMenu = new ScrollMagic.Scene({
+                triggerElement: '.history'
+            })
+            .on('enter', function() {
+                $('.global-wrapper--history .menu').hide();
+                $('.legacy--history').css('z-index', '3500');
+                $('.history').css('background', 'none');
+            })
+            .on('leave', function() {
+                $('.global-wrapper--history .menu').css('display', 'flex');
+                $('.legacy--history').css('z-index', '3500');
+                $('.history').css('background', 'none');
+            })
+            .offset(0)
+            .addTo(controller);
+    }
 };
 
 SX.browserDetect = function() {
@@ -1167,14 +1082,14 @@ SX.scrollToMainStatic = function() {
     const $headerTop = $('.page-header--top');
     const $headerBot = $('.page-header--bot');
 
-    if (fromVerticalTablet.matches) {
+    if (fromDesktop.matches) {
         const halfHistoryHeight = ($('.history').innerHeight() / 100) * 47;
 
         const scrollToHistory = function() {
             $headerTop.removeClass('show').addClass('hide');
             $headerBot.removeClass('hide').addClass('show');
 
-             new TimelineMax()
+            new TimelineMax()
                 .to(window, 1.5, {
                     scrollTo: '.history'
                 });
@@ -1184,7 +1099,7 @@ SX.scrollToMainStatic = function() {
             $headerBot.removeClass('show').addClass('hide');
             $headerTop.removeClass('hide').addClass('show');
 
-             new TimelineMax()
+            new TimelineMax()
                 .to(window, 1.5, {
                     scrollTo: '.legacy'
                 });
@@ -1209,7 +1124,7 @@ SX.scrollToMainStatic = function() {
                 .addTo(controllerStatic);
         });
         $('.global-wrapper--people').each(function() {
-            const scrollToHistory = function() {
+            const scrollToPeople = function() {
                 return new TimelineMax()
                     .to(window, 1.5, {
                         scrollTo: '.people-slider'
@@ -1227,7 +1142,7 @@ SX.scrollToMainStatic = function() {
                     offset: 50
                 })
                 .on('enter', function() {
-                    scrollToHistory();
+                    scrollToPeople();
                 })
                 .addTo(controllerStatic);
 
@@ -1269,18 +1184,31 @@ SX.universalTabs = function() {
     });
 };
 
-SX.parsley = function(){
-    $('.js-validate-form').parsley()
+SX.parsley = function() {
+    const formInputs = $('.form__input ');
+    $('.js-validate-form').parsley();
+
+    $('.form__input').each(function() {
+        $(this).on('change', function() {
+            const value = $(this).val();
+            const $label = $(this).siblings('.form__label-text');
+            if (value !== "") {
+                $label.addClass('hide');
+            } else {
+                $label.removeClass('hide');
+            }
+        });
+    });
 };
 
-SX.heightTransition = function(){
+SX.heightTransition = function() {
     const $button = $('.js-height-transition-button');
     const $elem = $('.js-height-transition');
     const elemHeight = $elem.innerHeight();
 
     $elem.addClass('hide');
 
-    $button.on('click', function(){
+    $button.on('click', function() {
         $elem.removeClass('hide');
         $(this).hide();
         const elemOffsetTop = $elem.offset().top;
@@ -1290,27 +1218,29 @@ SX.heightTransition = function(){
         }, 1000);
 
         new TimelineMax()
-        .fromTo($elem, 1, {minHeight: 'none',}, {minHeight: elemHeight, ease: animationDuration}, '')
-        ;
+            .fromTo('.form', 1, {
+                minHeight: 'none',
+            }, {
+                minHeight: '100vh',
+                ease: animationDuration
+            }, '');
     });
 };
 
-SX.wowInit = function(){
-    new WOW().init(
-      {
-        boxClass:     'wow',
+SX.wowInit = function() {
+    new WOW().init({
+        boxClass: 'wow',
         animateClass: '',
-        offset:       50,
-        mobile:       true,
-        live:         true,
+        offset: 50,
+        mobile: true,
+        live: true,
         scrollContainer: null,
         resetAnimation: true
 
-      }
-    );
+    });
 };
 
-SX.phoneMask = function(){
+SX.phoneMask = function() {
     const $formTel = $('.js-form-tel');
 
     if ($formTel.length) {
@@ -1320,9 +1250,10 @@ SX.phoneMask = function(){
     }
 };
 
-SX.fancybox = function(){
-    $('[data-fancybox="gallery"]').fancybox({
-    	infobar: false,
+SX.fancybox = function() {
+    $('.js-fancybox').fancybox({
+        clickContent: false,
+        infobar: false,
         buttons: [
             "close"
         ],
@@ -1330,34 +1261,40 @@ SX.fancybox = function(){
         preventCaptionOverlap: false,
         transitionEffect: 'slide',
         btnTpl: {
-            close:
-              '<button data-fancybox-close class="fancybox-button fancybox-button--close">' +
-              '<svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg>' +
-              "</button>",
-            arrowLeft:
-              '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left">' +
-              '<div><svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-right"></use></svg></div>' +
-              "</button>",
-            arrowRight:
-              '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right">' +
-              '<div><svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-right"></use></svg></div>' +
-              "</button>",
-          },
-        afterLoad : function(instance, current) {
+            close: '<button data-fancybox-close class="fancybox-button fancybox-button--close">' +
+                '<svg class="icon icon-close"><use xlink:href="#icon-close"></use></svg>' +
+                "</button>",
+            arrowLeft: '<button data-fancybox-prev class="fancybox-button fancybox-button--arrow_left">' +
+                '<div><svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-right"></use></svg></div>' +
+                "</button>",
+            arrowRight: '<button data-fancybox-next class="fancybox-button fancybox-button--arrow_right">' +
+                '<div><svg class="icon icon-arrow-right"><use xlink:href="#icon-arrow-right"></use></svg></div>' +
+                "</button>",
+        },
+        afterLoad: function(instance, current) {
             const $fancyboxBtns = $('.fancybox-button');
 
-            if(fromDesktop.matches){
+            if (fromDesktop.matches) {
                 $fancyboxBtns.each(function() {
                     $(this).addClass('hover mouseDown')
                 });
 
                 SX.customCursor();
             }
-        }
+        },
+        afterClose: function(){
+            $('.history__type-slider').slick('setPosition');
+            SX.historySlider();
+      }
     });
 };
 
 $(function onPageReady() {
+    SX.wowInit();
+    SX.phoneMask();
+    SX.fancybox();
+    SX.browserDetect();
+    SX.parsley();
     SX.legacyOnLoadAnimation();
     SX.legacyStaticHover();
     SX.mainScrollAnimation();
@@ -1370,15 +1307,10 @@ $(function onPageReady() {
     SX.filterMenu();
     SX.historyCircle();
     SX.socialMenu();
-    SX.browserDetect();
     SX.scrollToMainStatic();
     SX.projector();
     SX.universalTabs();
-    SX.parsley();
     SX.heightTransition();
-    SX.wowInit();
-    SX.phoneMask();
-    SX.fancybox();
 
     // custom cursor необходимо запускать последним
     SX.cursorAddClassToActiveElems();

@@ -551,7 +551,11 @@ a {
     position: relative;
     min-height: 100vh; }
     .legacy--main .legacy__x {
-      height: 305px; } }
+      height: 305px; }
+    .legacy--main .legacy__content {
+      -webkit-transform: translateY(-13px);
+          -ms-transform: translateY(-13px);
+              transform: translateY(-13px); } }
 
 .social {
   display: -webkit-box;
@@ -577,8 +581,9 @@ a {
 .social__link:first-child {
   margin-left: 0; }
 
-.social__link:hover {
-  color: #4d75a3; }
+@media screen and (min-width: 1440px) {
+  .social__link:hover {
+    color: #4d75a3; } }
 
 .social__close {
   display: -webkit-box;
@@ -605,6 +610,9 @@ a {
   color: #fff;
   margin-left: 30px;
   display: none; }
+  @media screen and (max-width: 1439px) {
+    .social__close {
+      cursor: pointer; } }
 
 .social__link-all {
   display: block;
@@ -746,6 +754,8 @@ a {
     .menu {
       width: 191px;
       top: 32px; }
+      .menu__link {
+        font-size: 15px; }
       .menu--fixed {
         width: 170px;
         top: 32px;
@@ -757,8 +767,7 @@ a {
         padding: 0 20px !important;
         top: 40px !important; }
       .menu--static {
-        z-index: 5000;
-        display: none; }
+        z-index: 5000; }
       .menu--legacy {
         position: absolute; } }
 
@@ -2887,23 +2896,22 @@ a {
   .join__text {
     padding-left: 14.6484375vw; } }
 
+@media screen and (max-width: 1439px) {
+  .join__text {
+    padding-left: 150px; } }
+
 @media screen and (max-width: 1023px) {
   .join {
     height: 215px; }
   .join__desc {
     font-size: 28px; }
   .join__text {
-    padding-left: 25vw; }
-  .join .link-more__icon {
-    -webkit-transform: translateY(2px);
-        -ms-transform: translateY(2px);
-            transform: translateY(2px);
-    width: 30px;
-    height: 18px; } }
+    padding-left: 150px; } }
 
 @media screen and (max-width: 767px) and (min-width: 0px) {
   .join {
-    height: 100px; }
+    height: 100px;
+    cursor: pointer; }
   .join__desc {
     font-size: 18px; }
   .join__text {
@@ -2913,11 +2921,9 @@ a {
         -ms-flex-pack: center;
             justify-content: center; }
   .join .link-more__icon {
-    -webkit-transform: translateY(2px);
-        -ms-transform: translateY(2px);
-            transform: translateY(2px);
-    width: 21px;
-    height: 12px; } }
+    -webkit-transform: translateY(-10px);
+        -ms-transform: translateY(-10px);
+            transform: translateY(-10px); } }
 
 .form {
   background: #ff5722;
@@ -2980,6 +2986,9 @@ a {
     transition: top 0.25s ease-in-out, opacity 0.25s ease-in-out;
     display: block;
     color: #fff; }
+    .form__label-text.hide {
+      opacity: 0;
+      top: -20px; }
   .form__link {
     font-size: 18px;
     color: #fff;
@@ -3263,3 +3272,75 @@ a {
     width: 50px;
     height: 50px;
     font-size: 16px; } }
+
+.openSocialMenu .menu {
+  display: none !important; }
+  .openSocialMenu .menu--legacy {
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important; }
+    .openSocialMenu .menu--legacy.hide {
+      display: none !important; }
+
+.openSocialMenu .page-header {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+
+.openSocialMenu .social__link {
+  opacity: 1;
+  visibility: visible; }
+
+.openSocialMenu .social__link-all {
+  display: none; }
+
+.openSocialMenu .social__close {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+.openSocialMenu .logo {
+  display: none; }
+
+.openFilterMenu .menu {
+  display: none !important; }
+
+.openFilterMenu .page-header {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end; }
+
+.openFilterMenu .social__link-all {
+  display: none; }
+
+.openFilterMenu .social__close {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+.openFilterMenu .history__menu {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  opacity: 1;
+  visibility: visible; }
+
+.openFilterMenu .history__btn {
+  opacity: 1; }
+
+.openFilterMenu .logo {
+  display: none; }
