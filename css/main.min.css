@@ -2025,7 +2025,8 @@ a {
       -ms-flex-align: center;
           align-items: center;
   width: 450px;
-  z-index: 1500; }
+  z-index: 1500;
+  display: none !important; }
 
 .history__btn {
   font-family: 'Foundry Sterling OT3';
@@ -2155,7 +2156,7 @@ a {
   -webkit-border-radius: 50%;
           border-radius: 50%;
   width: 100%;
-  height: auto;
+  height: 100%;
   -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.43, 0, 0.03, 1);
   transition: -webkit-transform 0.4s cubic-bezier(0.43, 0, 0.03, 1);
   -o-transition: transform 0.4s cubic-bezier(0.43, 0, 0.03, 1);
