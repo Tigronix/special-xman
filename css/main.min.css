@@ -2670,7 +2670,8 @@ a {
     padding-top: 77px;
     height: auto;
     min-height: 150px;
-    max-height: 768px; }
+    max-height: 768px;
+    overflow: hidden; }
     .history__year {
       -webkit-transform: translate(0);
           -ms-transform: translate(0);
