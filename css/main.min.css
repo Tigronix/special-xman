@@ -1529,8 +1529,7 @@ a {
 
 .people-slider {
   color: #fff;
-  position: relative;
-  margin-bottom: 33px; }
+  position: relative; }
   .people-slider:last-child {
     margin-bottom: 0; }
   .people-slider__popup {
@@ -1633,6 +1632,17 @@ a {
     -webkit-background-size: 962px auto;
             background-size: 962px auto;
     min-height: 100vh; }
+    .ie11 .people-slider__slide, .edge .people-slider__slide {
+      display: table-cell;
+      vertical-align: bottom; }
+      .ie11 .people-slider__slide:after, .edge .people-slider__slide:after {
+        content: '';
+        display: block;
+        clear: both; }
+    .ie11 .people-slider__img, .edge .people-slider__img {
+      float: left; }
+    .ie11 .people-slider__content, .edge .people-slider__content {
+      float: right; }
   .people-slider__x {
     font-size: 962px;
     height: 962px;
