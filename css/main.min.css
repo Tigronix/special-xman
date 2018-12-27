@@ -452,13 +452,15 @@ a {
   -webkit-transition: color 1s cubic-bezier(0.43, 0, 0.03, 1), fill 1s cubic-bezier(0.43, 0, 0.03, 1);
   -o-transition: color 1s cubic-bezier(0.43, 0, 0.03, 1), fill 1s cubic-bezier(0.43, 0, 0.03, 1);
   transition: color 1s cubic-bezier(0.43, 0, 0.03, 1), fill 1s cubic-bezier(0.43, 0, 0.03, 1);
-  z-index: 150; }
+  z-index: 150;
+  max-width: 100vw; }
 
 .legacy__h1 {
   font-family: 'Foundry Sterling OT3';
   color: #ffffff;
   font-size: 196px;
   line-height: 0;
+  height: 0;
   position: relative;
   z-index: 5;
   display: -webkit-box;
@@ -1347,7 +1349,7 @@ a {
     fill: #ff5722 !important; } }
 
 .global-wrapper--static .legacy__h1 {
-  margin-bottom: 155px;
+  margin-bottom: 145px;
   overflow: visible; }
 
 .global-wrapper--static .legacy + section {
@@ -1549,6 +1551,8 @@ a {
     margin: 0 auto;
     padding: 100px 0;
     height: 100%; }
+    .people-slider__popup-content p:last-child {
+      margin-bottom: 30px; }
   .people-slider__button {
     font-size: 18px;
     color: #fff;
@@ -2504,8 +2508,6 @@ a {
     overflow: visible; }
   .history__slide-wrapper {
     padding-bottom: 0; }
-  .history__type-slider-slide-wrapper {
-    padding-bottom: 162px; }
   .history__slider-slide-wrapper {
     padding-left: 8.7890625vw;
     padding-right: 8.7890625vw;
@@ -2595,6 +2597,8 @@ a {
     margin: 0 0 0 40px; }
   .history__btn:first-child {
     margin-left: 0; }
+  .history__type-slider-slide-wrapper {
+    padding-bottom: 162px; }
   .history__slide-wrapper {
     display: block;
     height: 100%;
@@ -2657,7 +2661,11 @@ a {
     -ms-flex-pack: end;
     -webkit-box-pack: end;
     -webkit-justify-content: flex-end;
-            justify-content: flex-end; } }
+            justify-content: flex-end; }
+  .history__year {
+    -webkit-transform: translateY(-60%);
+        -ms-transform: translateY(-60%);
+            transform: translateY(-60%); } }
 
 @media screen and (max-width: 767px) and (min-width: 0px) {
   .history {
@@ -3416,7 +3424,15 @@ a {
   .fancybox-button--arrow_right {
     margin-right: 24px !important; }
   .fancybox-button--close {
-    margin: 24px 24px 0 0; } }
+    margin: 24px 24px 0 0;
+    display: block; }
+    .fancybox-button--close svg {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%); } }
 
 @media screen and (max-width: 1023px) {
   .fancybox-button--arrow_left {
