@@ -460,7 +460,6 @@ a {
   color: #ffffff;
   font-size: 196px;
   line-height: 0;
-  height: 0;
   position: relative;
   z-index: 5;
   display: -webkit-box;
@@ -1316,6 +1315,8 @@ a {
     @media screen and (max-width: 1439px) {
       .global-wrapper--main {
         background: #212121; } }
+  .global-wrapper--static .legacy__h1 {
+    height: 0; }
 
 .edge .global-wrapper,
 .ie11 .global-wrapper {
@@ -1425,6 +1426,8 @@ a {
   .global-wrapper--static .legacy {
     margin-bottom: 0;
     min-height: 680px; }
+  .global-wrapper--history .legacy.scrolled {
+    background: transparent; }
   .global-wrapper--static .legacy__desc {
     width: 460px;
     -webkit-transform: translateX(55%);
@@ -1588,21 +1591,7 @@ a {
     transition: transform .2s;
     transition: transform .2s, -webkit-transform .2s; }
   .people-slider__popup-close {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
+    display: block;
     width: 100px;
     height: 100px;
     background: #282828;
@@ -1614,6 +1603,15 @@ a {
     right: 20px;
     top: 20px;
     cursor: pointer; }
+    .people-slider__popup-close svg {
+      display: block;
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%); }
   .people-slider__slide {
     display: -webkit-box;
     display: -webkit-flex;
@@ -2515,9 +2513,9 @@ a {
   .history__circle-line--bottom {
     top: auto; }
   .history__circle-line--prev {
-    -webkit-transform: translate(-50%, 0);
-        -ms-transform: translate(-50%, 0);
-            transform: translate(-50%, 0); }
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
   .history__img {
     width: 334px;
     height: 334px; }
@@ -2673,6 +2671,10 @@ a {
     height: auto;
     min-height: 150px;
     max-height: 768px; }
+    .history__year {
+      -webkit-transform: translate(0);
+          -ms-transform: translate(0);
+              transform: translate(0); }
   .history__show-mobile {
     display: -webkit-box;
     display: -webkit-flex;
