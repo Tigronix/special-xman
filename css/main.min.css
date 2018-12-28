@@ -157,7 +157,9 @@ a {
   color: currentColor; }
 
 a {
-  font-size: 16px;
+  font-size: 22px;
+  line-height: 34px;
+  font-weight: 400;
   color: #fff;
   text-decoration: underline;
   -webkit-transition: color 0.3s cubic-bezier(0.43, 0, 0.03, 1);
@@ -3225,7 +3227,8 @@ a {
     -o-transition: color 0.25s ease-in-out, opacity 0.25s ease-in-out, background 0.25s ease-in-out;
     transition: color 0.25s ease-in-out, opacity 0.25s ease-in-out, background 0.25s ease-in-out;
     z-index: 3000;
-    display: inline-block; }
+    display: inline-block;
+    text-decoration: none; }
     .form__link:before {
       display: block;
       content: '';
@@ -3239,8 +3242,10 @@ a {
       -o-transition: width .25s ease-in-out;
       transition: width .25s ease-in-out; }
     @media screen and (min-width: 1440px) {
-      .form__link:hover:before {
-        width: 0; } }
+      .form__link:hover {
+        color: #fff; }
+        .form__link:hover:before {
+          width: 0; } }
   .form__file-input-box {
     position: relative;
     display: inline-block;
