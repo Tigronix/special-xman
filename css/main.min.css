@@ -705,7 +705,8 @@ a {
   .menu__link {
     font-family: 'Foundry Sterling OT3';
     color: #ffffff;
-    font-size: 18px; }
+    font-size: 18px;
+    text-decoration: none; }
     @media screen and (min-width: 1440px) {
       .menu__link--scrolled:hover {
         color: #00bcd4; } }
@@ -857,7 +858,8 @@ a {
   -o-transition: cubic-bezier(0.43, 0, 0.03, 1) color 1s;
   transition: cubic-bezier(0.43, 0, 0.03, 1) color 1s;
   line-height: 0.8;
-  display: inline-block; }
+  display: inline-block;
+  text-decoration: none; }
 
 .scroll-section__title-link:hover {
   color: #ff5722; }
@@ -1200,7 +1202,8 @@ a {
   -webkit-box-align: start;
   -webkit-align-items: flex-start;
       -ms-flex-align: start;
-          align-items: flex-start; }
+          align-items: flex-start;
+  text-decoration: none; }
 
 @media screen and (min-width: 1440px) {
   .link-more:hover {
@@ -1549,6 +1552,17 @@ a {
     fill: #00bcd4 !important; }
   .global-wrapper--history .legacy__x--hover {
     fill: #00bcd4 !important; } }
+
+.peoplePopupActive {
+  position: fixed; }
+  .peoplePopupActive .people-slider__slider {
+    z-index: 9999; }
+    .peoplePopupActive .people-slider__slider .owl-stage-outer {
+      overflow: visible; }
+  .peoplePopupActive .main > * {
+    display: none; }
+  .peoplePopupActive .main > .people-slider {
+    display: block; }
 
 .people-slider {
   color: #fff;
@@ -3063,7 +3077,11 @@ a {
   display: flex;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
-          flex-wrap: wrap; }
+          flex-wrap: wrap;
+  text-decoration: none; }
+  @media screen and (min-width: 1440px) {
+    .join__desc:hover {
+      color: #fff; } }
 
 .join__text {
   width: 100%;
