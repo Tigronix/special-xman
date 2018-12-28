@@ -156,6 +156,17 @@ svg {
 a {
   color: currentColor; }
 
+a {
+  font-size: 16px;
+  color: #fff;
+  text-decoration: underline;
+  -webkit-transition: color 0.3s cubic-bezier(0.43, 0, 0.03, 1);
+  -o-transition: color 0.3s cubic-bezier(0.43, 0, 0.03, 1);
+  transition: color 0.3s cubic-bezier(0.43, 0, 0.03, 1); }
+  @media screen and (min-width: 1440px) {
+    a:hover {
+      color: #ff5722; } }
+
 body {
   font-family: 'Foundry Sterling OT3';
   background: #212121;
@@ -2369,7 +2380,8 @@ a {
   padding-top: 94px;
   position: relative;
   max-height: 500px;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  overflow-x: hidden; }
 
 .history__type-slider-item:before {
   display: block;
