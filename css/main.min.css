@@ -157,7 +157,7 @@ a {
   color: currentColor; }
 
 a {
-  font-size: 22px;
+  font-size: 1em;
   line-height: 34px;
   font-weight: 400;
   color: #fff;
@@ -1866,6 +1866,12 @@ a {
     line-height: 27px; } }
 
 @media screen and (max-width: 1439px) {
+  .people-slider__popup {
+    top: 0;
+    left: 0;
+    bottom: auto;
+    width: 100vw;
+    height: 100vh; }
   .people-slider__slide {
     -webkit-background-size: 600px 600px;
             background-size: 600px;
@@ -1928,12 +1934,6 @@ a {
 @media screen and (max-width: 767px) and (min-width: 0px) {
   .people-slider {
     padding-top: 48px; }
-    .people-slider__popup {
-      top: -48px;
-      right: -17px;
-      bottom: auto;
-      width: 100vw;
-      height: 100vh; }
     .people-slider__popup-content {
       padding: 70px 20px; }
       .people-slider__popup-content p {
@@ -2373,7 +2373,13 @@ a {
   width: 36.82291666666667vw;
   max-width: 707px;
   position: relative;
-  padding-bottom: 30px; }
+  padding-bottom: 30px;
+  -webkit-transform: translateY(30px);
+      -ms-transform: translateY(30px);
+          transform: translateY(30px);
+  opacity: 0;
+  overflow-y: auto;
+  overflow-x: hidden; }
 
 .history__type-slider-arrow {
   position: absolute;
@@ -2397,15 +2403,11 @@ a {
       color: #ff5722; } }
 
 .history__type-slider-item {
-  -webkit-transform: translateX(20px);
-      -ms-transform: translateX(20px);
-          transform: translateX(20px);
   padding-left: 120px;
   padding-top: 94px;
   position: relative;
   max-height: 500px;
-  overflow-y: scroll;
-  overflow-y: visible; }
+  overflow-y: auto; }
 
 .history__type-slider-item:before {
   display: block;
@@ -2556,6 +2558,12 @@ a {
       -webkit-transform: translateY(40px);
           -ms-transform: translateY(40px);
               transform: translateY(40px); }
+    .history__nav {
+      right: 0;
+      -webkit-flex-wrap: nowrap;
+          -ms-flex-wrap: nowrap;
+              flex-wrap: nowrap;
+      overflow-x: auto; }
   .history__slide-wrapper {
     padding-bottom: 0; }
   .history__slider-slide-wrapper {
@@ -2592,8 +2600,7 @@ a {
   .history__nav {
     bottom: 50px;
     width: 442px;
-    right: 0;
-    overflow: hidden; }
+    right: 0; }
   .history__nav-content .slick-dots {
     overflow-x: scroll;
     -webkit-flex-wrap: nowrap;
@@ -3242,7 +3249,7 @@ a {
       content: '';
       position: absolute;
       left: 0;
-      bottom: 0;
+      bottom: 6px;
       width: 100%;
       height: 1px;
       background: #fff;
@@ -3466,6 +3473,8 @@ a {
       display: inline-block;
       width: 1em;
       height: 1em; }
+  .fancybox-button.disabled {
+    color: #888; }
 
 @media screen and (min-width: 1440px) {
   .fancybox-content {
