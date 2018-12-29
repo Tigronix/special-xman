@@ -1928,11 +1928,19 @@ a {
 @media screen and (max-width: 767px) and (min-width: 0px) {
   .people-slider {
     padding-top: 48px; }
+    .people-slider__popup {
+      top: -48px;
+      right: -17px;
+      bottom: auto;
+      width: 100vw;
+      height: 100vh; }
     .people-slider__popup-content {
       padding: 70px 20px; }
       .people-slider__popup-content p {
         font-size: 18px;
         line-height: 24px; }
+        .people-slider__popup-content p:last-child {
+          margin-bottom: 70px; }
     .people-slider__popup-close {
       width: 50px;
       height: 50px;
@@ -2397,7 +2405,7 @@ a {
   position: relative;
   max-height: 500px;
   overflow-y: scroll;
-  overflow-x: hidden; }
+  overflow-y: visible; }
 
 .history__type-slider-item:before {
   display: block;
